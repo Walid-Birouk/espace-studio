@@ -1,0 +1,66 @@
+/* esPAce design tokens. */
+
+:root {
+  /* Colour: warm stone paper, charcoal ink, one deep green accent. */
+  --paper: #F5F3EE;
+  --paper-raised: #FCFBF8;
+  --zinc: #D3CFC5;          /* decorative lines only */
+  --graphite: #5C5F5A;
+  --ink: #1C1E1D;
+  --enamel: #1E5B4A;        /* accent: buttons, links, the plaque */
+  --on-enamel: #FFFFFF;
+  --plaque-green: #2F7D63;  /* focus ring + live dot only */
+  --shadow-paper: 0 1px 1px rgba(28,30,29,.06), 0 10px 28px rgba(28,30,29,.10);
+
+  /* Type: one family, width axis does the work */
+  --font-display: "Archivo Display", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Archivo", system-ui, sans-serif;
+  --stretch-xl: 70%;
+  --stretch-l: 75%;
+  --stretch-heading: 85%;
+  --fs-display-xl: clamp(52px, 13vw, 112px);
+  --fs-display-l: clamp(44px, 8vw, 72px);
+  --fs-heading: clamp(30px, 4.5vw, 40px);
+  --fs-title: 25px;
+  --fs-lead: 20px;
+  --fs-body: 17px;
+  --fs-caption: 14px;
+  --measure: 62ch;
+
+  /* Spacing */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 16px; --space-4: 24px;
+  --space-5: 40px; --space-6: 64px; --space-7: 104px; --space-8: 168px;
+
+  /* Radius: square paper, rounded = clickable */
+  --radius-paper: 0px;
+  --radius-plaque: 6px;
+  --radius-device: 28px;
+
+  /* Motion */
+  --ease-story: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-draw: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-med: 320ms;
+  --dur-slow: 720ms;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141615; --paper-raised: #1C1F1E; --zinc: #363A37; --graphite: #A8ACA6;
+    --ink: #EEEDE8; --enamel: #86C9AE; --on-enamel: #0E1A15; --plaque-green: #86C9AE;
+    --shadow-paper: 0 1px 1px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.45);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141615; --paper-raised: #1C1F1E; --zinc: #363A37; --graphite: #A8ACA6;
+  --ink: #EEEDE8; --enamel: #86C9AE; --on-enamel: #0E1A15; --plaque-green: #86C9AE;
+  --shadow-paper: 0 1px 1px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.45);
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 0ms; --dur-med: 0ms; --dur-slow: 0ms; }
+}

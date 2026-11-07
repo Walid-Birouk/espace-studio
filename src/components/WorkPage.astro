@@ -1,0 +1,72 @@
+---
+import WaIcon from './WaIcon.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProcessSequence from './ProcessSequence.astro';
+import Showcase from './Showcase.astro';
+import { strings, tr, typo, path, CONTACT, type Lang } from '../i18n';
+
+interface Props { project: CollectionEntry<'projects'>; lang: Lang }
+const { project, lang } = Astro.props;
+const p = project.data;
+const s = strings(lang);
+const others = (await getCollection('projects')).filter((x) => x.id !== project.id).sort((a, b) => a.data.order - b.data.order);
+const colon = lang === 'fr' ? '\u202f:' : ':';
+const booking = CONTACT.booking || `${path('/', lang)}#contact`;
+const site = Astro.site!;
+const ld = [{
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: p.name,
+  about: tr(p.sector, lang),
+  description: tr(p.seo.description, lang),
+  creator: { '@id': new URL('/#studio', site).href },
+  inLanguage: lang,
+  dateCreated: String(p.year),
+  url: new URL(path(`/work/${project.id}/`, lang), site).href,
+}];
+---
+<Base lang={lang} title={tr(p.seo.title, lang)} description={tr(p.seo.description, lang)} route={`/work/${project.id}/`} jsonld={ld}>
+  <div class="wrap work-hero">
+    <a class="link" href={path('/', lang)}>{s.work.back}</a>
+    <span class="tag">{p.kind === 'concept' ? s.case.label : 'Client'}</span>
+    <h1 class="display-xl">{p.name}</h1>
+    <p class="lead">{tr(p.sector, lang)}{tr(p.place, lang) && `, ${tr(p.place, lang)}`}. {tr(p.idea, lang)}</p>
+    {p.credits && <p class="caption">{tr(p.credits, lang)}</p>}
+  </div>
+
+  <ProcessSequence project={project} lang={lang} headingLevel="h2" showLink={false} showHead={false} />
+
+  {p.showcase && <Showcase project={project} lang={lang} />}
+
+  <section class="section wrap" aria-labelledby="w-type">
+    <div class="work-grid">
+      <div class="stack">
+        <h2 id="w-type" class="heading">{s.work.palette}</h2>
+        <div class="palette">{p.palette.map((c) => <div class="chip"><i style={`background:${c.hex}`}></i><span>{c.name}<br />{c.hex}</span></div>)}</div>
+      </div>
+      <div class="stack">
+        <h2 class="heading">{s.work.type}</h2>
+        <p><b>{p.type.display.family}</b>{colon} {tr(p.type.display.role, lang)}</p>
+        <p><b>{p.type.body.family}</b>{colon} {tr(p.type.body.role, lang)}</p>
+        {p.liveUrl
+          ? <p><a class="link" href={p.liveUrl} rel="noopener">{s.work.live}</a></p>
+          : p.kind === 'concept' && <p><a class="link" href={`/work/${project.id}/preview/`} hreflang="fr">{s.work.preview}</a></p>}
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="contact" aria-labelledby="w-cta">
+    <div class="stack-l">
+      <h2 id="w-cta" class="display-l">{typo(s.work.cta, lang)}</h2>
+      <div class="actions"><a class="btn" href={booking} target={CONTACT.booking ? '_blank' : undefined} rel="noopener">{s.hero.cta}</a><a class="link link--wa" href={CONTACT.whatsapp} rel="noopener"><WaIcon />{s.hero.whatsapp}</a></div>
+    </div>
+  </section>
+
+  <nav class="section wrap" aria-labelledby="w-more">
+    <h2 id="w-more" class="heading" style="margin-bottom:var(--space-4)">{s.work.otherWork}</h2>
+    <ul class="stack">
+      {others.map((o) => <li><a class="link" href={path(`/work/${o.id}/`, lang)}>{o.data.name}, {tr(o.data.sector, lang).toLowerCase()}</a></li>)}
+    </ul>
+  </nav>
+</Base>

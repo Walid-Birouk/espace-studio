@@ -1,0 +1,136 @@
+---
+// One phone screen of the customer story. Light like a real phone, in both themes.
+// The story follows Repair Ninja. Invented screens say "Example"; the live site says "Live site".
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { strings, typo, type Lang } from '../i18n';
+
+interface Props { id: string; lang: Lang }
+const { id, lang } = Astro.props;
+const s = strings(lang).story;
+const sc = s.screens;
+const t = (x: string) => typo(x, lang);
+import shop from '../assets/story-shop.webp';
+const rn = (await getEntry('projects', 'repair-ninja'))!.data;
+const bars = [[38, 52, 47, 61, 58, 74, 69], [44, 40, 55, 63, 60, 71, 80], [3, 5, 4, 7, 6, 9, 8], [1, 0, 2, 1, 3, 2, 2]];
+const nums = [1840, 612, 27, 5];
+const values = lang === 'fr' ? ['1 840 €', '612', '27', '5'] : ['€1,840', '612', '27', '5'];
+---
+<div class={`scr scr--${id}`}>
+  {id === 'search' && (
+    <div class="scr__pad">
+      <p class="scr__bar"><span data-type={t(sc.query)}>{t(sc.query)}</span><i class="scr__caret" aria-hidden="true"></i></p>
+      <div class="scr__map a" style="--d:.9s" aria-hidden="true"><i class="pin pin--you a a--drop" style="--d:1.5s"></i><i class="pin a a--drop" style="left:22%;top:62%;--d:1.2s"></i><i class="pin a a--drop" style="left:74%;top:30%;--d:1.3s"></i></div>
+      <div class="scr__card scr__card--you a" style="--d:1.8s">
+        <b>{sc.you}</b>
+        <span class="scr__rating"><span class="scr__stars" aria-hidden="true">★★★★★</span> 4,9 <small>(840)</small></span>
+        <small>{t(sc.open)}</small>
+        <span class="scr__btns"><span class="scr__tap">{sc.route}</span><span>{sc.call}</span></span>
+      </div>
+      <div class="scr__ghost a" style="--d:2s" aria-hidden="true"><i></i><i></i></div>
+      <div class="scr__ghost a" style="--d:2.1s" aria-hidden="true"><i></i><i></i></div>
+    </div>
+  )}
+  {id === 'ai' && (
+    <div class="scr__pad scr__chat">
+      <p class="scr__q a" style="--d:.15s">{t(sc.ask)}</p>
+      <div class="scr__awrap"><span class="scr__typing" aria-hidden="true"><i></i><i></i><i></i></span><p class="scr__a a" style="--d:1.5s">{t(sc.answer)}</p></div>
+      <div class="scr__ad a" style="--d:2.1s"><small>{sc.sponsored}</small><b>{sc.you}</b><span>{t(sc.adLine)}</span></div>
+      <div class="scr__walk a" style="--d:2.5s"><span class="scr__map scr__map--mini" aria-hidden="true"><i class="pin pin--you"></i></span><b>{t(sc.walk)}</b></div>
+    </div>
+  )}
+  {id === 'site' && (
+    <Image class="scr__shot scr__shot--pan" src={rn.pageMobile} alt={lang === 'fr' ? 'Repair Ninja, le site sur téléphone' : 'Repair Ninja, the site on a phone'} widths={[320, 480]} sizes="240px" loading="lazy" />
+  )}
+  {id === 'shop' && (
+    <>
+      <Image class="scr__shot" src={shop} alt={lang === 'fr' ? 'Repair Ninja, les iPhone en vente sur téléphone' : 'Repair Ninja, iPhones for sale on a phone'} widths={[320, 480]} sizes="240px" loading="lazy" />
+      <div class="scr__notif a a--down" style="--d:.8s"><b>{t(sc.order)}</b><span>{t(sc.orderLine)}</span></div>
+    </>
+  )}
+  {id === 'data' && (
+    <div class="scr__pad">
+      <p class="scr__week a" style="--d:.1s">{sc.week}</p>
+      <div class="scr__tiles">
+        {sc.tiles.map((label, k) => (
+          <div class="scr__tile a" style={`--d:${0.25 + k * 0.12}s`}>
+            <small>{label}</small>
+            <b data-count={nums[k]} data-suffix={k === 0 ? (lang === 'fr' ? ' €' : '') : ''} data-prefix={k === 0 && lang !== 'fr' ? '€' : ''}>{t(values[k])}</b>
+            <span class="scr__bars" aria-hidden="true">{bars[k].map((v, j) => <i style={`--h:${(v / Math.max(...bars[k])) * 100}%;--j:${j};--d:${0.45 + k * 0.12}s`}></i>)}</span>
+          </div>
+        ))}
+      </div>
+      <div class="scr__tip a" style="--d:1.4s"><small>{sc.tipLabel}</small><span>{t(sc.tip)}</span></div>
+      <p class="scr__fake">{sc.fake}</p>
+    </div>
+  )}
+  <span class="scr__tag">{['site', 'shop'].includes(id) ? s.real : s.example}</span>
+</div>
+
+<style>
+  .scr { position: relative; height: 100%; background: #F6F7F5; color: #1F2328; font: 13px/1.4 Arial, Helvetica, sans-serif; overflow: hidden; }
+  .scr__pad { padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; height: 100%; }
+  .scr__tag { position: absolute; left: 50%; bottom: 10px; translate: -50% 0; padding: 3px 9px; border-radius: 999px; background: rgba(31,35,40,.78); color: #fff; font-size: 11px; white-space: nowrap; }
+
+  .scr__bar { margin: 0; padding: 9px 14px; background: #fff; border-radius: 999px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  .scr__map { position: relative; height: 34%; border-radius: 10px; background:
+      linear-gradient(90deg, transparent 47%, #fff 47% 51%, transparent 51%),
+      linear-gradient(0deg, transparent 58%, #fff 58% 62%, transparent 62%),
+      linear-gradient(32deg, transparent 70%, #CFE3F2 70% 78%, transparent 78%),
+      #E5EBE3; }
+  .pin { position: absolute; left: 50%; top: 45%; width: 14px; height: 14px; border-radius: 50% 50% 50% 0; rotate: -45deg; background: #9AA0A6; }
+  .pin--you { width: 22px; height: 22px; background: #D93025; box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+  .scr__card { display: grid; gap: 2px; padding: 10px 12px; background: #fff; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+  .scr__card b { font-size: 15px; } .scr__card > small { color: #5F6368; }
+  .scr__rating { display: flex; gap: 6px; align-items: baseline; font-variant-numeric: tabular-nums; } .scr__rating small { color: #5F6368; }
+  .scr__stars { color: #F4B400; letter-spacing: 1px; }
+  .scr__btns { display: flex; gap: 6px; margin-top: 6px; } .scr__btns span { padding: 5px 10px; border-radius: 999px; background: #E8F0FE; color: #1A56C4; font-size: 12px; }
+  .scr__ghost { display: grid; gap: 6px; padding: 10px 12px; background: #fff; border-radius: 10px; opacity: .7; }
+  .scr__ghost i { display: block; height: 8px; border-radius: 4px; background: #E3E5E8; } .scr__ghost i:first-child { width: 55%; height: 10px; } .scr__ghost i:last-child { width: 80%; }
+
+  .scr__chat { gap: 12px; padding-top: 22px; }
+  .scr__q { margin: 0; align-self: flex-end; max-width: 85%; padding: 9px 12px; border-radius: 16px 16px 4px 16px; background: #E9E9EB; }
+  .scr__a { margin: 0; max-width: 92%; }
+  .scr__ad { display: grid; gap: 2px; padding: 10px 12px; border: 1px solid #DADCE0; border-radius: 10px; background: #fff; }
+  .scr__ad small { color: #5F6368; font-size: 11px; }
+
+  .scr__shot { display: block; width: 100%; height: auto; }
+  .scr__notif { position: absolute; left: 8px; right: 8px; top: 10px; display: grid; gap: 2px; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.94); box-shadow: 0 6px 20px rgba(0,0,0,.18); backdrop-filter: blur(6px); }
+
+  .scr__week { margin: 4px 0 0; font-weight: 700; font-size: 16px; }
+  .scr__tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .scr__tile { display: grid; gap: 2px; padding: 10px; background: #fff; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+  .scr__tile small { color: #5F6368; font-size: 11px; line-height: 1.25; min-height: 2.5em; } .scr__tile b { font-size: 18px; }
+  .scr__bars { display: flex; align-items: flex-end; gap: 3px; height: 30px; margin-top: 4px; }
+  .scr__bars i { flex: 1; height: var(--h); min-height: 2px; border-radius: 2px; background: #2F7D63; }
+  .scr__walk { display: grid; grid-template-columns: 56px 1fr; gap: 10px; align-items: center; padding: 8px; background: #fff; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+  .scr__map--mini { display: block; height: 56px; } .scr__map--mini .pin--you { width: 14px; height: 14px; left: 40%; top: 30%; }
+  .scr__tip { display: grid; gap: 2px; padding: 10px 12px; border-radius: 10px; background: #E7F0EB; }
+  .scr__tip small { color: #1E5B4A; font-weight: 700; font-size: 11px; }
+  .scr__fake { margin: 0; color: #5F6368; font-size: 11px; }
+
+  /* ---- Playback (Story.astro adds is-armed when motion is allowed, is-play when the screen shows) ---- */
+  .scr.is-armed .a { opacity: 0; translate: 0 10px; }
+  .scr.is-armed .a--drop { translate: 0 -26px; }
+  .scr.is-armed .a--down { translate: 0 -40px; }
+  .scr.is-play .a { opacity: 1; translate: 0 0; transition: opacity .45s ease var(--d, 0s), translate .6s cubic-bezier(.2, .9, .25, 1.15) var(--d, 0s); }
+  .scr__caret { display: none; width: 1.5px; height: 1.1em; margin-left: 1px; vertical-align: -2px; background: #1A56C4; }
+  .scr.is-armed .scr__caret { display: inline-block; }
+  .scr.is-play .scr__caret { animation: scrBlink 1s steps(1) infinite; }
+  .scr.is-armed .scr__tap { transition: none; }
+  .scr.is-play .scr__tap { animation: scrTap .5s ease 2.7s both; }
+  .scr__awrap { position: relative; }
+  .scr__typing { position: absolute; left: 0; top: 4px; display: none; gap: 4px; padding: 9px 12px; border-radius: 14px; background: #E9E9EB; }
+  .scr__typing i { width: 6px; height: 6px; border-radius: 50%; background: #8A8F98; animation: scrDot 1s ease-in-out infinite; }
+  .scr__typing i:nth-child(2) { animation-delay: .15s; } .scr__typing i:nth-child(3) { animation-delay: .3s; }
+  .scr.is-play .scr__typing { display: flex; animation: scrTyping 1.6s ease both; }
+  .scr__shot--pan { will-change: transform; }
+  .scr.is-play .scr__shot--pan { animation: scrPan 9s cubic-bezier(.45, 0, .3, 1) .8s both; }
+  .scr.is-armed .scr__bars i { scale: 1 0; transform-origin: 50% 100%; }
+  .scr.is-play .scr__bars i { scale: 1 1; transition: scale .5s cubic-bezier(.2, .8, .2, 1) calc(var(--d) + var(--j) * 45ms); }
+  @keyframes scrBlink { 50% { opacity: 0; } }
+  @keyframes scrDot { 50% { translate: 0 -3px; opacity: .5; } }
+  @keyframes scrTyping { 0%, 20% { opacity: 0; } 30%, 85% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes scrTap { 40% { scale: .92; background: #D2E3FC; } 100% { scale: 1; } }
+  @keyframes scrPan { 0% { translate: 0 0; } 45%, 55% { translate: 0 -22%; } 100% { translate: 0 -8%; } }
+</style>

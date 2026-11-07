@@ -1,0 +1,314 @@
+{
+  "name": "Flolove Paris",
+  "kind": "client",
+  "order": 0.3,
+  "flagship": false,
+  "year": 2026,
+  "sector": {
+    "fr": "Marque de vêtements brodés, e-shop et showroom",
+    "en": "Embroidered clothing label, e-shop and showroom"
+  },
+  "place": {
+    "fr": "Paris 11e, avenue de la République",
+    "en": "Paris 11th, Avenue de la République"
+  },
+  "idea": {
+    "fr": "Une boutique en ligne qui laisse la place aux broderies : grandes photos, une typo de mode, et le showroom à deux clics.",
+    "en": "An online shop that leaves room for the embroidery: big photos, a fashion typeface, and the showroom two clicks away."
+  },
+  "summary": {
+    "fr": "Une marque parisienne qui brode tout en France, vend dans le monde entier et reçoit aussi sur rendez-vous à l’atelier.",
+    "en": "A Paris label that embroiders everything in France, sells worldwide and also welcomes customers by appointment at the atelier."
+  },
+  "palette": [
+    {
+      "name": "Encre",
+      "hex": "#1C1C1C"
+    },
+    {
+      "name": "Bleu porte",
+      "hex": "#1F3A6B"
+    },
+    {
+      "name": "Camel",
+      "hex": "#B08A62"
+    },
+    {
+      "name": "Sable",
+      "hex": "#F4E5CE"
+    },
+    {
+      "name": "Gris",
+      "hex": "#5C5C5C"
+    },
+    {
+      "name": "Blanc",
+      "hex": "#FFFFFF"
+    }
+  ],
+  "type": {
+    "display": {
+      "family": "Libre Baskerville",
+      "role": {
+        "fr": "Titres et noms de pièces",
+        "en": "Headings and product names"
+      }
+    },
+    "body": {
+      "family": "Libre Baskerville",
+      "role": {
+        "fr": "Prix, tailles, infos",
+        "en": "Prices, sizes, details"
+      }
+    },
+    "sample": "Brodé dans un petit atelier en France."
+  },
+  "steps": [
+    {
+      "id": "need",
+      "title": {
+        "fr": "Le besoin.",
+        "en": "The need."
+      },
+      "body": {
+        "fr": "Vendre en ligne partout, sans perdre l’esprit de l’atelier.",
+        "en": "Sell online everywhere without losing the atelier feel."
+      }
+    },
+    {
+      "id": "mood",
+      "title": {
+        "fr": "L’ambiance.",
+        "en": "The mood."
+      },
+      "body": {
+        "fr": "Les portes de Paris, les marguerites brodées, le camel.",
+        "en": "Paris doors, embroidered daisies, camel."
+      }
+    },
+    {
+      "id": "tokens",
+      "title": {
+        "fr": "Couleurs et lettres.",
+        "en": "Colour and type."
+      },
+      "body": {
+        "fr": "Noir et blanc, une typo à empattements, les photos font la couleur.",
+        "en": "Black and white, a serif typeface, the photos bring the colour."
+      }
+    },
+    {
+      "id": "structure",
+      "title": {
+        "fr": "La structure.",
+        "en": "The structure."
+      },
+      "body": {
+        "fr": "Boutique, nouveautés, showroom, rendez-vous.",
+        "en": "Shop, new in, showroom, appointments."
+      }
+    },
+    {
+      "id": "page",
+      "title": {
+        "fr": "Le site.",
+        "en": "The website."
+      },
+      "body": {
+        "fr": "Une fiche produit pensée comme un lookbook.",
+        "en": "A product page that reads like a lookbook."
+      }
+    },
+    {
+      "id": "result",
+      "title": {
+        "fr": "Ce qu’il fait maintenant.",
+        "en": "What it does now."
+      },
+      "body": {
+        "fr": "Ventes en ligne, retrait à l’atelier, essayages réservés.",
+        "en": "Online sales, pick-up at the atelier, booked fittings."
+      }
+    }
+  ],
+  "results": [
+    {
+      "label": {
+        "fr": "E-commerce",
+        "en": "E-commerce"
+      },
+      "title": {
+        "fr": "Boutique Shopify bilingue",
+        "en": "Bilingual Shopify store"
+      },
+      "body": {
+        "fr": "Français et anglais, livraison mondiale, paiement en trois fois avec Alma.",
+        "en": "French and English, worldwide delivery, pay in three instalments with Alma."
+      }
+    },
+    {
+      "label": {
+        "fr": "Boutique",
+        "en": "In store"
+      },
+      "title": {
+        "fr": "Click & collect et rendez-vous",
+        "en": "Click & collect and appointments"
+      },
+      "body": {
+        "fr": "Retrait à l’atelier sous 24 h, essayages privés réservés en ligne.",
+        "en": "Pick-up at the atelier within 24 hours, private fittings booked online."
+      }
+    },
+    {
+      "label": {
+        "fr": "Fidélité",
+        "en": "Retention"
+      },
+      "title": {
+        "fr": "Newsletter",
+        "en": "Newsletter"
+      },
+      "body": {
+        "fr": "Inscription avec une remise sur la première commande.",
+        "en": "Sign-up with a discount on the first order."
+      }
+    }
+  ],
+  "fragments": [
+    {
+      "src": "./frag-rue.webp",
+      "alt": {
+        "fr": "Veste brodée devant une porte de Paris",
+        "en": "Embroidered jacket by a Paris door"
+      },
+      "ratio": 0.76,
+      "tones": [
+        "#1F3A6B",
+        "#B08A62"
+      ],
+      "x": 2,
+      "y": 3,
+      "w": 36,
+      "r": -2
+    },
+    {
+      "src": "./frag-daisy.webp",
+      "alt": {
+        "fr": "La doudoune aux marguerites",
+        "en": "The daisy puffer jacket"
+      },
+      "ratio": 0.93,
+      "tones": [
+        "#B08A62",
+        "#FFFFFF"
+      ],
+      "x": 41,
+      "y": 4,
+      "w": 22,
+      "r": 3
+    },
+    {
+      "src": "./frag-brode.webp",
+      "alt": {
+        "fr": "Détail d’une marguerite brodée",
+        "en": "Embroidered daisy detail"
+      },
+      "ratio": 1.84,
+      "tones": [
+        "#1F3A6B",
+        "#FFFFFF"
+      ],
+      "x": 66,
+      "y": 2,
+      "w": 13,
+      "r": -3
+    },
+    {
+      "src": "./frag-pull.webp",
+      "alt": {
+        "fr": "Pull rouge et pantalon tartan",
+        "en": "Red jumper and tartan trousers"
+      },
+      "ratio": 1.64,
+      "tones": [
+        "#C0392B",
+        "#B08A62"
+      ],
+      "x": 82,
+      "y": 5,
+      "w": 15,
+      "r": 2
+    },
+    {
+      "src": "./frag-archive.webp",
+      "alt": {
+        "fr": "L’atelier, les étagères",
+        "en": "The atelier shelves"
+      },
+      "ratio": 0.51,
+      "tones": [
+        "#F4E5CE",
+        "#E8B4A8"
+      ],
+      "x": 4,
+      "y": 54,
+      "w": 36,
+      "r": 1
+    },
+    {
+      "src": "./frag-veste.webp",
+      "alt": {
+        "fr": "La veste portée",
+        "en": "The jacket, worn"
+      },
+      "ratio": 1.45,
+      "tones": [
+        "#B08A62",
+        "#1F3A6B"
+      ],
+      "x": 44,
+      "y": 46,
+      "w": 18,
+      "r": -2
+    },
+    {
+      "src": "./frag-logo.webp",
+      "alt": {
+        "fr": "Le logo Flolove",
+        "en": "The Flolove logo"
+      },
+      "ratio": 0.16,
+      "tones": [
+        "#FFFFFF",
+        "#1C1C1C"
+      ],
+      "x": 64,
+      "y": 70,
+      "w": 34,
+      "r": 1
+    }
+  ],
+  "typeSpecimen": "./type-specimen.webp",
+  "pageDesktop": "./page-desktop.webp",
+  "pageMobile": "./page-mobile.webp",
+  "shotDesktop": "./shot-desktop.webp",
+  "shotMobile": "./shot-mobile.webp",
+  "wireframeDesktop": "wireframe-desktop.svg",
+  "wireframeMobile": "wireframe-mobile.svg",
+  "liveUrl": "https://www.floloveparis.com/",
+  "credits": {
+    "fr": "Conçu et développé de bout en bout par Walid Birouk. Photos : Flolove Paris.",
+    "en": "Designed and built end to end by Walid Birouk. Photos: Flolove Paris."
+  },
+  "seo": {
+    "title": {
+      "fr": "Flolove Paris, boutique Shopify d’une marque de vêtements brodés",
+      "en": "Flolove Paris, Shopify store for an embroidered clothing label"
+    },
+    "description": {
+      "fr": "E-shop bilingue d’une marque parisienne : fiches produit comme un lookbook, click & collect, rendez-vous au showroom, paiement en trois fois.",
+      "en": "Bilingual e-shop for a Paris label: lookbook-style product pages, click & collect, showroom appointments, pay in three."
+    }
+  }
+}

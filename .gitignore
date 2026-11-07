@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.astro/
+test-results/
+playwright-report/
+shots/
+.env
+
+# Internal working notes
+CLAUDE.md
+.claude/
+docs/
+
+# Raw captures (large; the webp versions are committed)
+src/content/projects/*/raw/

@@ -1,0 +1,113 @@
+---
+import WaIcon from './WaIcon.astro';
+// The home page IS the work: a pinboard of every project's real pieces.
+// A carousel: native horizontal swipe, plus auto-advance one project every few seconds (main.ts),
+// with a progress signal under it. Pauses on hover, touch, focus and with reduced motion.
+// Positions are in cqh (1/100 of the board height), so the board scales with the screen.
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { strings, tr, typo, path, CONTACT, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = strings(lang);
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const booking = CONTACT.booking || '#contact';
+
+const STRIDE = 206; // width of one project cluster
+const boardW = 6 + projects.length * STRIDE + 6;
+
+// Slight, fixed tilts so the board looks pinned by hand.
+const tilt = [-1.2, 0.8, -0.6, 1.4, -1.6, 0.5, 1.1];
+---
+<section class="wall" id="travaux" aria-labelledby="wall-title" data-wall>
+  <div class="wall__intro wrap" data-wall-intro>
+    <h1 id="wall-title" class="wall__title">{typo(s.hero.title, lang)}</h1>
+    <p class="wall__line">{typo(s.hero.line, lang)}</p>
+    <div class="actions">
+      <a class="btn" href={booking} target={CONTACT.booking ? '_blank' : undefined} rel="noopener">{s.hero.cta}</a>
+      <a class="link link--wa" href={CONTACT.whatsapp} rel="noopener"><WaIcon />{s.hero.whatsapp}</a>
+    </div>
+    <p class="wall__hint caption" aria-hidden="true"><span class="wall__rule"></span>{typo(s.hero.hint, lang)}</p>
+  </div>
+  <div class="wall__viewport" data-wall-viewport tabindex="-1">
+    <div class="wall__board" data-wall-board style={`--board-w:${boardW}`}>
+
+      {projects.map((proj, k) => {
+        const p = proj.data;
+        const ox = 6 + k * STRIDE;
+        const href = path(`/work/${proj.id}/`, lang);
+        const at = (x: number, y: number, w: number, r: number, d: number) => `--x:${ox + x};--y:${y};--w:${w};--r:${r}deg;--d:${d}`;
+        const detail = p.fragments[0];
+        return (
+          <article class="cluster" aria-labelledby={`wall-${proj.id}`}>
+            <a class="cluster__title" href={href} style={`--x:${ox};--y:3`}>
+              <span class="tag">{p.kind === 'concept' ? s.wall.concept : 'Client'}</span>
+              <h2 id={`wall-${proj.id}`}>{p.name}</h2>
+              <span class="caption">{tr(p.sector, lang)}{tr(p.place, lang) && `, ${tr(p.place, lang).split(',')[0]}`}</span>
+            </a>
+
+            <a class="piece" href={href} tabindex="-1" aria-hidden="true" style={at(0, 17, 92, tilt[(k + 0) % 7], 0.2)} data-piece>
+              <span class="piece__frame piece__frame--browser">
+                <span class="piece__bar"><i></i><i></i><i></i></span>
+                <Image src={p.shotDesktop} alt="" widths={[480, 820, 1200]} sizes="(min-width: 900px) 62vh, 70vw" loading={k === 0 ? 'eager' : 'lazy'} />
+              </span>
+              <span class="piece__cap">{s.wall.kinds.page}</span>
+            </a>
+
+            <a class="piece" href={href} tabindex="-1" aria-hidden="true" style={at(97, 23, 24, tilt[(k + 1) % 7], 0.6)} data-piece>
+              <span class="piece__frame piece__frame--phone">
+                <Image src={p.shotMobile} alt="" widths={[200, 390]} sizes="(min-width: 900px) 18vh, 30vw" loading="lazy" />
+              </span>
+              <span class="piece__cap">{s.wall.kinds.mobile}</span>
+            </a>
+
+            <a class="piece" href={href} tabindex="-1" aria-hidden="true" style={at(70, 64, 25, tilt[(k + 2) % 7] + 3, 0.9)} data-piece>
+              <span class="piece__frame" style={`aspect-ratio:1/${detail.ratio}`}>
+                <Image src={detail.src} alt="" widths={[240, 400]} sizes="(min-width: 900px) 18vh, 30vw" loading="lazy" />
+              </span>
+            </a>
+
+            <a class="piece" href={href} tabindex="-1" aria-hidden="true" style={at(127, 5, 52, tilt[(k + 3) % 7], 0.4)} data-piece>
+              <span class="piece__frame piece__frame--mood">
+                {p.fragments.map((fr) => (
+                  <span class="mini" style={`--fx:${fr.x}%;--fy:${fr.y}%;--fw:${fr.w}%;--fr:${fr.r}deg;--ratio:${fr.ratio}`}>
+                    <Image src={fr.src} alt="" widths={[160, 240]} sizes="10vh" loading="lazy" />
+                  </span>
+                ))}
+              </span>
+              <span class="piece__cap">{s.wall.kinds.mood}</span>
+            </a>
+
+            <a class="piece" href={href} tabindex="-1" aria-hidden="true" style={at(128, 50, 21, tilt[(k + 4) % 7], 0.7)} data-piece>
+              <span class="piece__frame" style="aspect-ratio:4/5">
+                <Image src={p.typeSpecimen} alt="" widths={[240, 400]} sizes="(min-width: 900px) 16vh, 26vw" loading="lazy" />
+              </span>
+              <span class="piece__cap">{p.type.display.family}</span>
+            </a>
+
+            <a class="piece" href={href} tabindex="-1" aria-hidden="true" style={at(154, 48, 25, tilt[(k + 5) % 7], 0.5)} data-piece>
+              <span class="piece__frame piece__frame--palette">
+                {p.palette.map((c) => (
+                  <span><i style={`background:${c.hex}`}></i><b>{c.name}</b></span>
+                ))}
+              </span>
+              <span class="piece__cap">{s.wall.kinds.palette}</span>
+            </a>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+  <div class="wall__ctrl wrap" data-wall-ctrl>
+    <button class="wall__pause" type="button" data-wall-pause aria-pressed="false" aria-label={s.wall.pause} data-label-pause={s.wall.pause} data-label-play={s.wall.play}>
+      <svg class="i-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>
+      <svg class="i-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>
+    </button>
+    <ol class="wall__dots">
+      {projects.map((proj, k) => (
+        <li><button type="button" data-wall-go={k} aria-label={`${s.wall.go} : ${proj.data.name}`}><span>{proj.data.name}</span><i><b></b></i></button></li>
+      ))}
+    </ol>
+  </div>
+</section>

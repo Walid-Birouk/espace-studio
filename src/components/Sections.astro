@@ -1,0 +1,76 @@
+---
+import WaIcon from './WaIcon.astro';
+// Prices, about, contact.
+import { Image } from 'astro:assets';
+import { strings, typo, CONTACT, type Lang } from '../i18n';
+import walid from '../assets/walid.png';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = strings(lang);
+const booking = CONTACT.booking || '#contact';
+const formKey = (import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined) || CONTACT.formKey;
+---
+<section class="section wrap" id="offres" aria-labelledby="pk-title">
+  <div class="prices">
+    <h2 id="pk-title" class="prices__title">{typo(s.packages.title, lang)}</h2>
+    <ul class="prices__list">
+      {s.packages.items.map((it) => (
+        <li>
+          <span class="prices__name">{it.name}</span>
+          <span class="prices__amount"><small>{s.packages.from}</small> {typo(it.price, lang)}</span>
+          <span class="prices__body">{typo(it.body, lang)}</span>
+          <span class="prices__time caption">{typo(it.time, lang)}</span>
+        </li>
+      ))}
+      {s.packages.care.map((c) => (
+        <li class="prices__care">
+          <span class="prices__name">{typo(c.title, lang)}</span>
+          <span class="prices__body">{typo(c.body, lang)}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="caption prices__quote">{typo(s.packages.quote, lang)}</p>
+  </div>
+</section>
+
+<section class="section wrap" id="apropos" aria-labelledby="about-title">
+  <div class="about">
+    <Image class="about__photo" src={walid} alt={s.about.photoAlt} widths={[240, 480]} sizes="(min-width: 900px) 240px, 40vw" loading="lazy" />
+    <div class="stack">
+      <h2 id="about-title" class="heading">{s.about.title}</h2>
+      <p class="lead">{typo(s.about.body, lang)}</p>
+      <p><a class="link" href={CONTACT.linkedin} rel="noopener">LinkedIn</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact__inner">
+    <div class="contact__head">
+      <span class="plaque contact__plaque" aria-hidden="true"><span>esPAce</span></span>
+      <h2 id="contact-title" class="contact__title">{typo(s.contact.title, lang)}</h2>
+    </div>
+    <div class="contact__side">
+      <a class="btn btn--light contact__cta" href={booking} target={CONTACT.booking ? '_blank' : undefined} rel="noopener">{s.contact.cta}</a>
+      <ul class="contact__list">
+        <li><a href={CONTACT.whatsapp} rel="noopener"><small class="link--wa"><WaIcon size={15} />{s.contact.whatsapp}</small><span>{CONTACT.phoneDisplay}</span></a></li>
+        <li><a href={`mailto:${CONTACT.email}`}><small>{s.contact.email}</small><span>{CONTACT.email}</span></a></li>
+      </ul>
+      <p class="contact__note">{typo(s.contact.note, lang)}</p>
+    </div>
+    {formKey && (
+      <form class="form" data-contact data-sent={typo(s.contact.sent, lang)} data-error={typo(s.contact.error, lang)} data-required={typo(s.contact.required, lang)} novalidate>
+        <h3 class="title full">{s.contact.formTitle}</h3>
+        <input type="hidden" name="access_key" value={formKey} />
+        <input type="hidden" name="subject" value="esPAce : nouveau message" />
+        <input type="checkbox" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" />
+        <label class="field" for="f-name">{s.contact.name}<input id="f-name" name="name" autocomplete="name" required /></label>
+        <label class="field" for="f-biz">{s.contact.business}<input id="f-biz" name="business" autocomplete="organization" /></label>
+        <label class="field full" for="f-reply">{s.contact.contactField}<input id="f-reply" name="reply" autocomplete="email" required /></label>
+        <label class="field full" for="f-msg">{s.contact.message}<textarea id="f-msg" name="message"></textarea></label>
+        <div class="full actions"><button class="btn btn--light" type="submit">{s.contact.send}</button><p class="form__status" role="status"></p></div>
+      </form>
+    )}
+  </div>
+</section>

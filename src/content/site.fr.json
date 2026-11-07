@@ -1,0 +1,200 @@
+{
+  "lang": "fr",
+  "meta": {
+    "title": "esPAce, sites, Google et ventes en ligne pour les commerces",
+    "description": "Site vitrine, référencement Google, publicités, boutique Shopify et données réunies pour les commerces. Basé à Paris, clients partout."
+  },
+  "nav": {
+    "work": "Projets",
+    "offers": "Prix",
+    "about": "À propos",
+    "contact": "Contact",
+    "switch": "English",
+    "switchLang": "en",
+    "home": "esPAce, accueil",
+    "skip": "Aller au contact",
+    "menu": "Menu",
+    "close": "Fermer",
+    "top": "Haut de page",
+    "theme": "Changer de thème, clair ou sombre",
+    "langLabel": "Langue"
+  },
+  "hero": {
+    "title": "Plus de clients, en ligne et en boutique.",
+    "line": "Site, Google, publicités, vente en ligne, vos chiffres. Basé à Paris, pour les commerces du monde entier.",
+    "cta": "Prendre rendez-vous",
+    "whatsapp": "WhatsApp",
+    "hint": "Projets récents"
+  },
+  "story": {
+    "title": "Comment un client vous trouve.",
+    "intro": "",
+    "doLabel": "Mon travail",
+    "example": "Exemple",
+    "real": "Site en ligne",
+    "beats": [
+      {
+        "id": "search",
+        "time": "19 h 40",
+        "title": "« iPhone reconditionné près de moi »",
+        "body": "On choisit en haut de la liste. Sinon, c’est le voisin.",
+        "do": "Fiche Google, avis, référencement (SEO)."
+      },
+      {
+        "id": "ai",
+        "time": "19 h 42",
+        "title": "Puis la question à ChatGPT.",
+        "body": "Il cite les commerces qu’il connaît.",
+        "do": "Présence dans les IA, publicités Google, Instagram, ChatGPT."
+      },
+      {
+        "id": "site",
+        "time": "19 h 45",
+        "title": "Votre site s’ouvre.",
+        "body": "Produits, horaires, accès : en trois secondes.",
+        "do": "Site vitrine rapide, à votre image."
+      },
+      {
+        "id": "shop",
+        "time": "23 h 10",
+        "title": "Boutique fermée. Commande passée.",
+        "body": "Payé en 4 fois, retrait demain.",
+        "do": "Boutique en ligne, sur Shopify ou ailleurs."
+      },
+      {
+        "id": "data",
+        "time": "9 h, le lendemain",
+        "title": "Tout sur un écran.",
+        "body": "Ventes, visites, appels, avis.",
+        "do": "Vos outils reliés, vos chiffres réunis."
+      }
+    ],
+    "screens": {
+      "query": "iphone reconditionné près de moi",
+      "you": "Repair Ninja",
+      "open": "Rue de la Cerisaie, Paris 4e",
+      "route": "Itinéraire",
+      "call": "Appeler",
+      "ask": "Où acheter un iPhone reconditionné garanti, à Paris ?",
+      "answer": "Repair Ninja, près de Bastille : iPhone testés en atelier, garantis 1 an, retrait en boutique.",
+      "sponsored": "Sponsorisé",
+      "adLine": "iPhone garantis 1 an, livrés en 48 h.",
+      "order": "Nouvelle commande, 23 h 10",
+      "orderLine": "iPhone 16 Pro, retrait samedi 10 h. Payée.",
+      "week": "Cette semaine",
+      "tiles": [
+        "Ventes",
+        "Visites du site",
+        "Appels depuis Google",
+        "Nouveaux avis"
+      ],
+      "fake": "Chiffres fictifs",
+      "walk": "Itinéraire : 6 min à pied",
+      "tipLabel": "À retenir",
+      "tip": "Samedi est votre meilleur jour."
+    },
+    "endTitle": "Chaque étape, un client de plus.",
+    "endBody": "Premier appel gratuit.",
+    "cta": "Prendre rendez-vous"
+  },
+  "wall": {
+    "label": "Projets",
+    "concept": "Concept",
+    "kinds": {
+      "page": "site",
+      "mobile": "téléphone",
+      "mood": "ambiance",
+      "type": "typographie",
+      "palette": "couleurs",
+      "photo": "photo"
+    },
+    "open": "Ouvrir le projet",
+    "pause": "Mettre le défilement en pause",
+    "play": "Relancer le défilement",
+    "go": "Voir le projet"
+  },
+  "case": {
+    "title": "De l’ambiance au site.",
+    "label": "Concept",
+    "invented": "Commerce imaginé pour l’exemple",
+    "step": "Étape",
+    "of": "sur",
+    "prev": "Précédente",
+    "next": "Suivante",
+    "seeAll": "Voir le projet en entier",
+    "moodCaption": "Planche d’ambiance",
+    "tokensCaption": "Couleurs prises dans les photos",
+    "wireCaption": "La maquette",
+    "pageCaption": "Le site, sur ordinateur et téléphone"
+  },
+  "packages": {
+    "title": "Prix clairs.",
+    "from": "dès",
+    "items": [
+      {
+        "name": "Vitrine",
+        "price": "499 €",
+        "body": "Jusqu’à 10 pages, fiche Google, référencement local, plan Google Maps.",
+        "time": "1 à 2 semaines"
+      },
+      {
+        "name": "Connecté",
+        "price": "1 290 €",
+        "body": "Vitrine + formulaires, Google Sheets, WhatsApp, boutique Shopify.",
+        "time": "2 à 3 semaines"
+      },
+      {
+        "name": "Sur mesure",
+        "price": "2 900 €",
+        "body": "IA, données réunies, applications, cloud ou serveur à vous.",
+        "time": "4 semaines et plus"
+      }
+    ],
+    "quote": "Vous envoyez photos et idées, je construis. Acompte seulement quand la première maquette vous plaît. Domaine et hébergement facturés à part. TVA non applicable, art. 293 B du CGI.",
+    "care": [
+      {
+        "title": "Suivi 29 € par mois",
+        "body": "Mises à jour, contrôle Google mensuel, petites retouches."
+      },
+      {
+        "title": "Suivi + publicités dès 149 € par mois",
+        "body": "Google, Instagram, ChatGPT : je crée et je règle vos annonces. Budget pub en plus."
+      }
+    ]
+  },
+  "about": {
+    "title": "Walid Birouk.",
+    "body": "Ingénieur IA et données, je crée des sites pour les commerces. Basé à Paris, je travaille partout, en français ou en anglais.",
+    "photoAlt": "Walid Birouk"
+  },
+  "contact": {
+    "title": "On en parle ?",
+    "cta": "Prendre rendez-vous",
+    "whatsapp": "WhatsApp",
+    "email": "E-mail",
+    "note": "Réponse sous 24 h.",
+    "formTitle": "Ou laissez un message",
+    "name": "Votre nom",
+    "business": "Votre commerce",
+    "message": "Votre message",
+    "contactField": "E-mail ou téléphone",
+    "send": "Envoyer le message",
+    "sent": "Message envoyé. Je vous réponds sous 24 h.",
+    "error": "Le message n’est pas parti. Écrivez-moi sur WhatsApp ou par e-mail.",
+    "required": "Indiquez votre nom et un moyen de vous répondre."
+  },
+  "footer": {
+    "rights": "esPAce, studio web de Walid Birouk.",
+    "area": "Basé à Paris. Clients partout."
+  },
+  "work": {
+    "back": "Retour à l’accueil",
+    "process": "La démarche",
+    "palette": "Palette",
+    "type": "Typographie",
+    "preview": "Ouvrir la page du concept",
+    "live": "Voir le site en ligne",
+    "otherWork": "Autres projets",
+    "cta": "Un site comme celui-ci pour votre commerce ?"
+  }
+}

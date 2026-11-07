@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Wall from './Wall.astro';
+import Story from './Story.astro';
+import ProcessSequence from './ProcessSequence.astro';
+import Sections from './Sections.astro';
+import { strings, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = strings(lang);
+const flagship = (await getCollection('projects')).find((p) => p.data.flagship)!;
+---
+<Base lang={lang} title={s.meta.title} description={s.meta.description} route="/">
+  <Wall lang={lang} />
+  <Story lang={lang} />
+  <ProcessSequence project={flagship} lang={lang} />
+  <Sections lang={lang} />
+</Base>

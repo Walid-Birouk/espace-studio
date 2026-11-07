@@ -1,0 +1,298 @@
+{
+  "name": "Repair Ninja",
+  "kind": "client",
+  "order": 0,
+  "flagship": true,
+  "year": 2026,
+  "sector": {
+    "fr": "Boutique d’iPhone d’occasion et reconditionnés",
+    "en": "Used and refurbished iPhone shop"
+  },
+  "place": {
+    "fr": "Paris 4e, près de Bastille",
+    "en": "Paris 4th, near Bastille"
+  },
+  "idea": {
+    "fr": "La boutique en ligne d’un réparateur parisien : iPhone garantis 1 an, retrait en boutique ou livraison en 48 h, reprise de l’ancien téléphone.",
+    "en": "The online shop of a Paris repairer: iPhones guaranteed for a year, store pickup or 48-hour delivery, trade-in of your old phone."
+  },
+  "summary": {
+    "fr": "Un atelier de réparation, 840 avis Google. Ses iPhone devaient aussi se vendre en ligne.",
+    "en": "A repair shop with 840 Google reviews. Its iPhones had to sell online too."
+  },
+  "palette": [
+    {
+      "name": "Cuivre",
+      "hex": "#C67139"
+    },
+    {
+      "name": "Crème",
+      "hex": "#F9F4ED"
+    },
+    {
+      "name": "Sable",
+      "hex": "#DCD3C4"
+    },
+    {
+      "name": "Olive",
+      "hex": "#3D472B"
+    },
+    {
+      "name": "Rouille",
+      "hex": "#8C491A"
+    },
+    {
+      "name": "Charbon",
+      "hex": "#201E1D"
+    }
+  ],
+  "type": {
+    "display": {
+      "family": "Caprasimo",
+      "role": {
+        "fr": "Titres, ronds et chaleureux",
+        "en": "Headings, round and warm"
+      }
+    },
+    "body": {
+      "family": "Figtree",
+      "role": {
+        "fr": "Prix, capacités, garanties",
+        "en": "Prices, storage, guarantees"
+      }
+    },
+    "sample": "Garanti 1 an."
+  },
+  "steps": [
+    {
+      "id": "need",
+      "title": {
+        "fr": "Le besoin.",
+        "en": "The need."
+      },
+      "body": {
+        "fr": "Vendre en ligne les iPhone du magasin.",
+        "en": "Sell the shop’s iPhones online."
+      }
+    },
+    {
+      "id": "mood",
+      "title": {
+        "fr": "L’ambiance.",
+        "en": "The mood."
+      },
+      "body": {
+        "fr": "La façade rose, les techniciens, les iPhone ouverts.",
+        "en": "The pink front, the technicians, the opened iPhones."
+      }
+    },
+    {
+      "id": "tokens",
+      "title": {
+        "fr": "Couleurs et lettres.",
+        "en": "Colour and type."
+      },
+      "body": {
+        "fr": "Cuivre, crème, charbon. Une typo ronde qui rassure.",
+        "en": "Copper, cream, charcoal. A round, reassuring typeface."
+      }
+    },
+    {
+      "id": "structure",
+      "title": {
+        "fr": "La structure.",
+        "en": "The structure."
+      },
+      "body": {
+        "fr": "La garantie d’abord, puis les iPhone, la reprise, la boutique.",
+        "en": "The guarantee first, then the iPhones, trade-in, the shop."
+      }
+    },
+    {
+      "id": "page",
+      "title": {
+        "fr": "Le site.",
+        "en": "The website."
+      },
+      "body": {
+        "fr": "Catalogue, panier, paiement, retrait en boutique.",
+        "en": "Catalogue, cart, payment, store pickup."
+      }
+    },
+    {
+      "id": "result",
+      "title": {
+        "fr": "Ce qu’il fait maintenant.",
+        "en": "What it does now."
+      },
+      "body": {
+        "fr": "La boutique vend aussi la nuit.",
+        "en": "The shop sells at night too."
+      }
+    }
+  ],
+  "results": [
+    {
+      "label": {
+        "fr": "Vente en ligne",
+        "en": "Online sales"
+      },
+      "title": {
+        "fr": "Payé en 3 ou 4 fois",
+        "en": "Pay in 3 or 4 instalments"
+      },
+      "body": {
+        "fr": "Catalogue, panier, paiement sans frais dès 150 €, retrait gratuit ou livraison en 48 h.",
+        "en": "Catalogue, cart, interest-free instalments from €150, free pickup or 48-hour delivery."
+      }
+    },
+    {
+      "label": {
+        "fr": "Reprise",
+        "en": "Trade-in"
+      },
+      "title": {
+        "fr": "Estimation en 2 minutes",
+        "en": "A quote in 2 minutes"
+      },
+      "body": {
+        "fr": "Le client estime son ancien téléphone en ligne, la reprise est déduite en boutique.",
+        "en": "Customers value their old phone online; the trade-in comes off in store."
+      }
+    },
+    {
+      "label": {
+        "fr": "Confiance",
+        "en": "Trust"
+      },
+      "title": {
+        "fr": "Voir l’intérieur",
+        "en": "See inside"
+      },
+      "body": {
+        "fr": "Un comparateur à faire glisser montre la différence entre occasion et reconditionné.",
+        "en": "A slider shows the difference between used and refurbished, inside the phone."
+      }
+    }
+  ],
+  "fragments": [
+    {
+      "src": "./frag-boutique.webp",
+      "alt": {
+        "fr": "La boutique rose, rue de la Cerisaie",
+        "en": "The pink shop front, rue de la Cerisaie"
+      },
+      "ratio": 0.62,
+      "tones": [
+        "#E9A9B8",
+        "#F9F4ED"
+      ],
+      "x": 2,
+      "y": 4,
+      "w": 38,
+      "r": -2
+    },
+    {
+      "src": "./frag-iphones.webp",
+      "alt": {
+        "fr": "iPhone d’occasion, prix de départ",
+        "en": "Used iPhones, starting price"
+      },
+      "ratio": 0.71,
+      "tones": [
+        "#C67139",
+        "#F9F4ED"
+      ],
+      "x": 43,
+      "y": 3,
+      "w": 30,
+      "r": 2
+    },
+    {
+      "src": "./frag-dedans.webp",
+      "alt": {
+        "fr": "Occasion ou reconditionné : l’intérieur d’un iPhone",
+        "en": "Used or refurbished: inside an iPhone"
+      },
+      "ratio": 1.99,
+      "tones": [
+        "#3D5AFE",
+        "#201E1D"
+      ],
+      "x": 78,
+      "y": 4,
+      "w": 16,
+      "r": 3
+    },
+    {
+      "src": "./frag-produit.webp",
+      "alt": {
+        "fr": "Fiche produit, iPhone 16 Pro Max",
+        "en": "Product card, iPhone 16 Pro Max"
+      },
+      "ratio": 1.45,
+      "tones": [
+        "#DCD3C4",
+        "#8C491A"
+      ],
+      "x": 6,
+      "y": 46,
+      "w": 18,
+      "r": 2
+    },
+    {
+      "src": "./frag-avis.webp",
+      "alt": {
+        "fr": "840 avis Google",
+        "en": "840 Google reviews"
+      },
+      "ratio": 0.42,
+      "tones": [
+        "#201E1D",
+        "#C67139"
+      ],
+      "x": 28,
+      "y": 52,
+      "w": 30,
+      "r": -1
+    },
+    {
+      "src": "./frag-titre.webp",
+      "alt": {
+        "fr": "Le titre : garanti 1 an",
+        "en": "The headline: 1-year guarantee"
+      },
+      "ratio": 0.46,
+      "tones": [
+        "#C67139",
+        "#201E1D"
+      ],
+      "x": 62,
+      "y": 50,
+      "w": 33,
+      "r": -3
+    }
+  ],
+  "typeSpecimen": "./type-specimen.webp",
+  "pageDesktop": "./page-desktop.webp",
+  "pageMobile": "./page-mobile.webp",
+  "shotDesktop": "./shot-desktop.webp",
+  "shotMobile": "./shot-mobile.webp",
+  "wireframeDesktop": "wireframe-desktop.svg",
+  "wireframeMobile": "wireframe-mobile.svg",
+  "liveUrl": "https://boutique.repairninja.fr/",
+  "credits": {
+    "fr": "Conçu et développé de bout en bout par Walid Birouk. Photos et contenus : Repair Ninja.",
+    "en": "Designed and built end to end by Walid Birouk. Photos and content: Repair Ninja."
+  },
+  "seo": {
+    "title": {
+      "fr": "Repair Ninja, boutique en ligne d’iPhone reconditionnés à Paris",
+      "en": "Repair Ninja, an online shop for refurbished iPhones in Paris"
+    },
+    "description": {
+      "fr": "Boutique en ligne d’un réparateur parisien : iPhone d’occasion garantis 1 an, paiement en plusieurs fois, reprise en ligne, retrait à Bastille.",
+      "en": "Online shop for a Paris repairer: used iPhones guaranteed for a year, instalments, online trade-in, pickup near Bastille."
+    }
+  }
+}

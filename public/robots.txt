@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /work/*/preview/
+Disallow: /en/work/*/preview/
+
+Sitemap: https://espace-studio.vercel.app/sitemap-index.xml

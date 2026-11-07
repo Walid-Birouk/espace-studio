@@ -1,0 +1,152 @@
+---
+import { Image } from 'astro:assets';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import type { CollectionEntry } from 'astro:content';
+import { strings, tr, typo, path, type Lang } from '../i18n';
+
+interface Props { project: CollectionEntry<'projects'>; lang: Lang; headingLevel?: 'h2' | 'h3'; showLink?: boolean; showHead?: boolean }
+const { project, lang, headingLevel = 'h2', showLink = true, showHead = true } = Astro.props;
+const p = project.data;
+const s = strings(lang);
+const dir = join(process.cwd(), 'src/content/projects', project.id);
+const wireD = readFileSync(join(dir, p.wireframeDesktop), 'utf8');
+const wireM = readFileSync(join(dir, p.wireframeMobile), 'utf8');
+const H = headingLevel;
+const stepTitle = (id: string) => tr(p.steps.find((x) => x.id === id)!.title, lang);
+const ids = p.steps.map((x) => x.id);
+---
+<section class="section case wrap" data-seq id={`projet-${project.id}`} aria-labelledby={`seq-${project.id}`}>
+  {showHead ? (
+    <div class="case__head">
+      <H id={`seq-${project.id}`} class="display-l">{typo(s.case.title, lang)}</H>
+      <p class="caption">{p.name} · {typo(tr(p.sector, lang), lang)}</p>
+    </div>
+  ) : (
+    <H id={`seq-${project.id}`} class="sr-only">{s.work.process}</H>
+  )}
+
+  <!-- Static sequence: the reduced-motion layout, the phone strip, and what screen readers read. -->
+  <ol class="seq__steps" data-seq-static>
+    {p.steps.map((step, i) => (
+      <li class="seq__step">
+        <div class="seq__text">
+          <span class="seq__num">{s.case.step} {i + 1} {s.case.of} {p.steps.length}</span>
+          <h3 class="heading">{tr(step.title, lang)}</h3>
+          <p class="measure">{tr(step.body, lang)}</p>
+        </div>
+        <div>
+          {step.id === 'need' && (
+            <div class="mat"><div class="mat__inner" style="aspect-ratio:4/3;display:grid;place-items:center;padding:24px">
+              <p class="lead" style="font-family:var(--font-display);font-stretch:85%;font-weight:700;font-size:clamp(22px,3vw,34px);line-height:1.15;max-width:22ch">« {tr(p.summary, lang)} »</p>
+            </div></div>
+          )}
+          {step.id === 'mood' && (
+            <figure class="mat"><div class="mat__inner mood">
+              {p.fragments.map((fr) => (
+                <div class="frag" style={`--x:${fr.x}%;--y:${fr.y}%;--w:${fr.w}%;--r:${fr.r}deg;--ratio:${fr.ratio}`}>
+                  <Image src={fr.src} alt={tr(fr.alt, lang)} widths={[240, 480]} sizes="(min-width: 900px) 25vw, 45vw" loading="lazy" />
+                </div>
+              ))}
+            </div><figcaption class="caption" style="padding:8px 12px">{s.case.moodCaption}</figcaption></figure>
+          )}
+          {step.id === 'tokens' && (
+            <figure class="mat"><div class="tokens">
+              {p.palette.map((c) => <div class="chip"><i style={`background:${c.hex}`}></i><span>{c.name}<br />{c.hex}</span></div>)}
+              <Image class="specimen" src={p.typeSpecimen} alt={`${p.type.display.family}, ${tr(p.type.display.role, lang)}. ${p.type.body.family}, ${tr(p.type.body.role, lang)}.`} widths={[300]} sizes="150px" loading="lazy" />
+            </div><figcaption class="caption" style="padding:0 12px 10px">{s.case.tokensCaption}</figcaption></figure>
+          )}
+          {step.id === 'structure' && (
+            <figure class="mat"><div class="wire" role="img" aria-label={s.case.wireCaption}>
+              <Fragment set:html={wireD} />
+              <Fragment set:html={wireM} />
+            </div></figure>
+          )}
+          {step.id === 'page' && (
+            <figure class="mat"><div class="devices">
+              <div class="laptop">
+                <div class="laptop__screen"><Image src={p.pageDesktop} alt={lang === 'fr' ? `${p.name}, page d’accueil sur ordinateur` : `${p.name}, home page on desktop`} widths={[720, 1200]} sizes="(min-width: 900px) 45vw, 70vw" loading="lazy" /></div>
+                <div class="laptop__base"></div>
+              </div>
+              <div class="mobile__frame"><div class="mobile__screen"><Image src={p.pageMobile} alt={lang === 'fr' ? `${p.name}, page d’accueil sur téléphone` : `${p.name}, home page on a phone`} widths={[240, 390]} sizes="160px" loading="lazy" /></div></div>
+            </div><figcaption class="caption" style="padding:0 12px 10px">{s.case.pageCaption}</figcaption></figure>
+          )}
+          {step.id === 'result' && (
+            <div class="results">
+              {p.results.map((r) => (
+                <div class="result"><span class="caption">{tr(r.label, lang)}</span><b class="title">{tr(r.title, lang)}</b><p>{tr(r.body, lang)}</p></div>
+              ))}
+            </div>
+          )}
+        </div>
+      </li>
+    ))}
+  </ol>
+  <div class="seq__dots" aria-hidden="true">{p.steps.map(() => <i></i>)}</div>
+  <div class="seq__nav">
+    <button class="btn btn--quiet" type="button" data-seq-prev>{s.case.prev}</button>
+    <button class="btn btn--quiet" type="button" data-seq-next>{s.case.next}</button>
+  </div>
+  <p class="sr-only" aria-live="polite"><span data-seq-count>1</span> / {p.steps.length}</p>
+
+  <!-- Motion stage (desktop, motion allowed). Decorative copy of the sequence above. -->
+  <div class="seq__pin" data-seq-pin hidden aria-hidden="true">
+    <div class="seq__stage">
+      <div class="seq__rail">
+        <ol class="seq__list">
+          {p.steps.map((step, i) => <li data-seq-item={i}>{i + 1}&nbsp;&nbsp;{tr(step.title, lang).replace(/\.$/, '')}</li>)}
+        </ol>
+        <div class="seq__copy">
+          {p.steps.map((step, i) => (
+            <div data-seq-copy={i}>
+              <p class="heading">{tr(step.title, lang)}</p>
+              <p>{tr(step.body, lang)}</p>
+            </div>
+          ))}
+        </div>
+        {showLink && <a class="link" href={path(`/work/${project.id}/`, lang)} tabindex="-1">{s.case.seeAll}</a>}
+      </div>
+      <div class="seq__canvas" data-canvas>
+        <div class="mat"><div class="mat__inner" data-board>
+          <div class="layer" data-layer="need" style="display:grid;place-items:center;padding:48px">
+            <p style="font-family:var(--font-display);font-stretch:85%;font-weight:700;font-size:clamp(26px,2.6vw,40px);line-height:1.15;max-width:22ch">« {tr(p.summary, lang)} »</p>
+          </div>
+          <div class="layer mood" data-layer="mood">
+            {p.fragments.map((fr, i) => (
+              <div class="frag" data-mood={i} style={`--x:${fr.x}%;--y:${fr.y}%;--w:${fr.w}%;--r:${fr.r}deg;--ratio:${fr.ratio}`}>
+                <Image src={fr.src} alt="" widths={[240, 480]} sizes="22vw" loading="lazy" />
+              </div>
+            ))}
+          </div>
+          <div class="layer" data-layer="tokens">
+            <div style="position:absolute;left:4%;top:4%;right:4%;display:flex;gap:14px;align-items:flex-end">
+              {p.palette.map((c, i) => <div class="chip" data-chip={i}><i style={`background:${c.hex}`}></i><span>{c.name}<br />{c.hex}</span></div>)}
+              <div data-type style="margin-left:auto;width:16%;min-width:110px"><Image src={p.typeSpecimen} alt="" widths={[300]} sizes="160px" loading="lazy" style="box-shadow:var(--shadow-paper)" /></div>
+            </div>
+          </div>
+          <div class="layer" data-layer="wire" style="color:var(--ink)">
+            <div data-wire-desk style="position:absolute;left:6%;top:18%;width:62%"><div style="aspect-ratio:16/10;overflow:hidden;border:10px solid transparent"><Fragment set:html={wireD} /></div></div>
+            <div data-wire-mob style="position:absolute;left:73%;top:18%;width:19%"><div style="aspect-ratio:9/19;overflow:hidden;padding:6px"><Fragment set:html={wireM} /></div></div>
+          </div>
+          <div class="layer" data-layer="page">
+            <div data-laptop style="position:absolute;left:6%;top:18%;width:62%">
+              <div class="laptop__screen" data-screen><Image data-scroll-img src={p.pageDesktop} alt="" widths={[1200]} sizes="50vw" loading="lazy" /></div>
+              <div class="laptop__base"></div>
+            </div>
+            <div data-phone2 style="position:absolute;left:73%;top:18%;width:19%">
+              <div class="mobile__frame"><div class="mobile__screen"><Image data-scroll-img src={p.pageMobile} alt="" widths={[390]} sizes="180px" loading="lazy" /></div></div>
+            </div>
+          </div>
+          <div class="layer" data-layer="result" style="display:flex;align-items:center;padding:4%">
+            <div class="results" style="width:100%">
+              {p.results.map((r) => (
+                <div class="result"><span class="caption">{tr(r.label, lang)}</span><b class="title">{tr(r.title, lang)}</b><p>{tr(r.body, lang)}</p></div>
+              ))}
+            </div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+    <div class="progress"><i data-progress></i></div>
+  </div>
+</section>

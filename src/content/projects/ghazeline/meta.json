@@ -1,0 +1,399 @@
+{
+  "name": "Ghazeline",
+  "kind": "client",
+  "order": 0.1,
+  "flagship": false,
+  "year": 2026,
+  "sector": {
+    "fr": "Boutique de prêt-à-porter en ligne",
+    "en": "Online ready-to-wear store"
+  },
+  "place": {
+    "fr": "",
+    "en": ""
+  },
+  "idea": {
+    "fr": "Une boutique pensée pour le paiement à la livraison : commande sans compte, colis créé automatiquement, et un agent qui répond sur Instagram.",
+    "en": "A store built for cash on delivery: order without an account, the parcel created automatically, and an agent that answers on Instagram."
+  },
+  "summary": {
+    "fr": "Une marque qui vendait surtout par messages Instagram, sans paiement par carte, avec un tarif de livraison différent dans chaque région.",
+    "en": "A label that sold mostly through Instagram messages, with no card payments and a different delivery rate for every region."
+  },
+  "palette": [
+    {
+      "name": "Prune",
+      "hex": "#3A1E2A"
+    },
+    {
+      "name": "Rose poudré",
+      "hex": "#EFE1DC"
+    },
+    {
+      "name": "Mauve",
+      "hex": "#9C4A5A"
+    },
+    {
+      "name": "Ivoire",
+      "hex": "#FAF8F5"
+    },
+    {
+      "name": "Encre",
+      "hex": "#1C1917"
+    }
+  ],
+  "type": {
+    "display": {
+      "family": "Marcellus",
+      "role": {
+        "fr": "Titres, élégants et calmes",
+        "en": "Headings, elegant and calm"
+      }
+    },
+    "body": {
+      "family": "DM Sans",
+      "role": {
+        "fr": "Prix, tailles, livraison",
+        "en": "Prices, sizes, delivery"
+      }
+    },
+    "sample": "Vos tenues préférées, livrées chez vous."
+  },
+  "steps": [
+    {
+      "id": "need",
+      "title": {
+        "fr": "Le besoin.",
+        "en": "The need."
+      },
+      "body": {
+        "fr": "Tout se passait en messages Instagram, et le paiement à la livraison.",
+        "en": "Everything ran through Instagram messages, with cash on delivery."
+      }
+    },
+    {
+      "id": "mood",
+      "title": {
+        "fr": "L’ambiance.",
+        "en": "The mood."
+      },
+      "body": {
+        "fr": "Les photos de la marque : tissus, couleurs, lumière douce.",
+        "en": "The brand’s own photos: fabrics, colours, soft light."
+      }
+    },
+    {
+      "id": "tokens",
+      "title": {
+        "fr": "Couleurs et lettres.",
+        "en": "Colour and type."
+      },
+      "body": {
+        "fr": "Un prune profond, un rose poudré, une typo élégante.",
+        "en": "A deep plum, a powder pink, an elegant typeface."
+      }
+    },
+    {
+      "id": "structure",
+      "title": {
+        "fr": "La structure.",
+        "en": "The structure."
+      },
+      "body": {
+        "fr": "La collection d’abord, puis comment commander et payer.",
+        "en": "The collection first, then how to order and pay."
+      }
+    },
+    {
+      "id": "page",
+      "title": {
+        "fr": "Le site.",
+        "en": "The website."
+      },
+      "body": {
+        "fr": "En ligne depuis janvier 2026, pensé pour le téléphone.",
+        "en": "Live since January 2026, built for the phone."
+      }
+    },
+    {
+      "id": "result",
+      "title": {
+        "fr": "Ce qu’il fait maintenant.",
+        "en": "What it does now."
+      },
+      "body": {
+        "fr": "Commandes, colis et réponses Instagram, en grande partie automatiques.",
+        "en": "Orders, parcels and Instagram replies, mostly automatic."
+      }
+    }
+  ],
+  "results": [
+    {
+      "label": {
+        "fr": "Agent IA",
+        "en": "AI agent"
+      },
+      "title": {
+        "fr": "50 à 100 messages par jour",
+        "en": "50–100 messages a day"
+      },
+      "body": {
+        "fr": "Un agent n8n répond aux messages Instagram ; l’équipe n’intervient que pour les demandes complexes.",
+        "en": "An n8n agent answers the Instagram messages; the team only steps in for complex requests."
+      }
+    },
+    {
+      "label": {
+        "fr": "Automatisation",
+        "en": "Automation"
+      },
+      "title": {
+        "fr": "Commande, colis, alerte",
+        "en": "Order, parcel, alert"
+      },
+      "body": {
+        "fr": "Chaque commande crée le colis chez le transporteur, la fiche de commande et une alerte Telegram.",
+        "en": "Each order creates the courier parcel, the order sheet and a Telegram alert."
+      }
+    },
+    {
+      "label": {
+        "fr": "Données",
+        "en": "Data"
+      },
+      "title": {
+        "fr": "Le client, c’est un numéro",
+        "en": "The customer is a phone number"
+      },
+      "body": {
+        "fr": "Commande sans compte, historique par numéro de téléphone, tarifs de livraison par région.",
+        "en": "Checkout without an account, history by phone number, delivery fees per region."
+      }
+    }
+  ],
+  "fragments": [
+    {
+      "src": "./frag-ensemble.webp",
+      "alt": {
+        "fr": "Ensemble camel, photo de la collection",
+        "en": "Camel set, collection photo"
+      },
+      "ratio": 1.02,
+      "tones": [
+        "#8A5A3B",
+        "#EFE1DC"
+      ],
+      "x": 2,
+      "y": 3,
+      "w": 30,
+      "r": -3
+    },
+    {
+      "src": "./frag-lin.webp",
+      "alt": {
+        "fr": "Ensemble lin moutarde",
+        "en": "Mustard linen set"
+      },
+      "ratio": 1.37,
+      "tones": [
+        "#C9962E",
+        "#EFE1DC"
+      ],
+      "x": 35,
+      "y": 2,
+      "w": 20,
+      "r": 2
+    },
+    {
+      "src": "./frag-pouce.webp",
+      "alt": {
+        "fr": "Pull de pouce",
+        "en": "Thumbhole jumper"
+      },
+      "ratio": 1.29,
+      "tones": [
+        "#3A1E2A",
+        "#EFE1DC"
+      ],
+      "x": 58,
+      "y": 5,
+      "w": 19,
+      "r": -2
+    },
+    {
+      "src": "./frag-robe.webp",
+      "alt": {
+        "fr": "Robe rose",
+        "en": "Pink dress"
+      },
+      "ratio": 1.47,
+      "tones": [
+        "#D7B4BC",
+        "#FAF8F5"
+      ],
+      "x": 80,
+      "y": 3,
+      "w": 17,
+      "r": 3
+    },
+    {
+      "src": "./frag-boots.webp",
+      "alt": {
+        "fr": "Boots en cuir",
+        "en": "Leather boots"
+      },
+      "ratio": 1.47,
+      "tones": [
+        "#3A1E2A",
+        "#C9C3B8"
+      ],
+      "x": 4,
+      "y": 50,
+      "w": 18,
+      "r": 2
+    },
+    {
+      "src": "./frag-pantalon.webp",
+      "alt": {
+        "fr": "Pantalon noir sur un tapis",
+        "en": "Black trousers on a rug"
+      },
+      "ratio": 1.16,
+      "tones": [
+        "#1C1917",
+        "#9C4A5A"
+      ],
+      "x": 27,
+      "y": 56,
+      "w": 26,
+      "r": -1
+    },
+    {
+      "src": "./frag-foulard.webp",
+      "alt": {
+        "fr": "Foulard thaïlandais",
+        "en": "Thai scarf"
+      },
+      "ratio": 1.08,
+      "tones": [
+        "#8C6A6A",
+        "#EFE1DC"
+      ],
+      "x": 60,
+      "y": 57,
+      "w": 24,
+      "r": -3
+    }
+  ],
+  "typeSpecimen": "./type-specimen.webp",
+  "pageDesktop": "./page-desktop.webp",
+  "pageMobile": "./page-mobile.webp",
+  "shotDesktop": "./shot-desktop.webp",
+  "shotMobile": "./shot-mobile.webp",
+  "wireframeDesktop": "wireframe-desktop.svg",
+  "wireframeMobile": "wireframe-mobile.svg",
+  "liveUrl": "https://www.ghazeline.com/",
+  "credits": {
+    "fr": "Conçu et développé de bout en bout par Walid Birouk. Photos : Ghazeline.",
+    "en": "Designed and engineered end to end by Walid Birouk. Photos: Ghazeline."
+  },
+  "seo": {
+    "title": {
+      "fr": "Ghazeline, boutique de prêt-à-porter en ligne avec agent IA Instagram",
+      "en": "Ghazeline, an online fashion store with an Instagram AI agent"
+    },
+    "description": {
+      "fr": "Boutique en ligne pensée pour le paiement à la livraison : modèle de données Supabase, colis automatiques et agent n8n qui répond à 50 à 100 messages Instagram par jour.",
+      "en": "Online store built for cash on delivery: Supabase data model, automatic parcels and an n8n agent answering 50 to 100 Instagram messages a day."
+    }
+  },
+  "showcase": {
+    "kind": "chat",
+    "title": {
+      "fr": "L’agent Instagram, tel qu’il répond.",
+      "en": "The Instagram agent, as it answers."
+    },
+    "messages": [
+      {
+        "from": "user",
+        "text": {
+          "fr": "Salam, l’ensemble lin existe en rose ? Vous livrez à Oran ?",
+          "en": "Salam, does the linen set come in pink? Do you deliver to Oran?"
+        }
+      },
+      {
+        "from": "bot",
+        "text": {
+          "fr": "Salam ! Oui, l’ensemble lin existe en rose bébé, 3 800 DA. On livre à Oran en 2 à 5 jours, et vous payez à la réception.",
+          "en": "Salam! Yes, the linen set comes in baby pink, 3,800 DA. We deliver to Oran in 2 to 5 days, and you pay on delivery."
+        }
+      },
+      {
+        "from": "user",
+        "text": {
+          "fr": "Je peux vérifier avant de payer ?",
+          "en": "Can I check it before paying?"
+        }
+      },
+      {
+        "from": "bot",
+        "text": {
+          "fr": "Oui, vous ouvrez le colis devant le livreur avant de payer. Je vous envoie le lien pour commander ?",
+          "en": "Yes, you open the parcel in front of the courier before paying. Shall I send you the link to order?"
+        }
+      }
+    ],
+    "plan": [
+      {
+        "label": {
+          "fr": "Outil",
+          "en": "Tool"
+        },
+        "value": {
+          "fr": "Agent IA sur n8n",
+          "en": "AI agent on n8n"
+        }
+      },
+      {
+        "label": {
+          "fr": "Volume",
+          "en": "Volume"
+        },
+        "value": {
+          "fr": "50 à 100 messages Instagram par jour",
+          "en": "50–100 Instagram messages a day"
+        }
+      },
+      {
+        "label": {
+          "fr": "Connaît",
+          "en": "Knows"
+        },
+        "value": {
+          "fr": "Produits, prix, livraison, paiement à la réception",
+          "en": "Products, prices, delivery, cash on delivery"
+        }
+      },
+      {
+        "label": {
+          "fr": "Relais",
+          "en": "Handover"
+        },
+        "value": {
+          "fr": "Les demandes complexes passent à l’équipe",
+          "en": "Complex requests go to the team"
+        }
+      },
+      {
+        "label": {
+          "fr": "Autour",
+          "en": "Around it"
+        },
+        "value": {
+          "fr": "Next.js, Supabase, transporteur Yalidine, bot Telegram",
+          "en": "Next.js, Supabase, Yalidine courier, Telegram bot"
+        }
+      }
+    ]
+  }
+}

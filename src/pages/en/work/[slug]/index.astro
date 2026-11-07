@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import WorkPage from '../../../../components/WorkPage.astro';
+export async function getStaticPaths() {
+  return (await getCollection('projects')).map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+const { project } = Astro.props;
+---
+<WorkPage project={project} lang="en" />

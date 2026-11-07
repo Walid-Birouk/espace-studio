@@ -1,0 +1,200 @@
+{
+  "lang": "en",
+  "meta": {
+    "title": "esPAce, websites, Google and online sales for small businesses",
+    "description": "Shop websites, Google visibility, ads, Shopify stores and all your numbers in one place. Based in Paris, working worldwide."
+  },
+  "nav": {
+    "work": "Work",
+    "offers": "Prices",
+    "about": "About",
+    "contact": "Contact",
+    "switch": "Français",
+    "switchLang": "fr",
+    "home": "esPAce, home",
+    "skip": "Skip to contact",
+    "menu": "Menu",
+    "close": "Close",
+    "top": "Back to top",
+    "theme": "Switch between light and dark theme",
+    "langLabel": "Language"
+  },
+  "hero": {
+    "title": "More customers, online and in store.",
+    "line": "Website, Google, ads, online sales, your numbers. Based in Paris, for shops anywhere.",
+    "cta": "Book a free call",
+    "whatsapp": "WhatsApp",
+    "hint": "Recent work"
+  },
+  "story": {
+    "title": "How a customer finds you.",
+    "intro": "",
+    "doLabel": "My part",
+    "example": "Example",
+    "real": "Live site",
+    "beats": [
+      {
+        "id": "search",
+        "time": "7:40 pm",
+        "title": "“Refurbished iPhone near me”",
+        "body": "People pick from the top. Otherwise, next door.",
+        "do": "Google listing, reviews, search optimisation (SEO)."
+      },
+      {
+        "id": "ai",
+        "time": "7:42 pm",
+        "title": "Then the question to ChatGPT.",
+        "body": "It names the shops it knows.",
+        "do": "Presence in AI answers, Google, Instagram and ChatGPT ads."
+      },
+      {
+        "id": "site",
+        "time": "7:45 pm",
+        "title": "Your site opens.",
+        "body": "Products, hours, directions: in three seconds.",
+        "do": "A fast website that looks like you."
+      },
+      {
+        "id": "shop",
+        "time": "11:10 pm",
+        "title": "Shop closed. Order placed.",
+        "body": "Paid in 4 instalments, pickup tomorrow.",
+        "do": "Online store, on Shopify or elsewhere."
+      },
+      {
+        "id": "data",
+        "time": "Next day, 9 am",
+        "title": "Everything on one screen.",
+        "body": "Sales, visits, calls, reviews.",
+        "do": "Your tools connected, your numbers in one place."
+      }
+    ],
+    "screens": {
+      "query": "refurbished iphone near me",
+      "you": "Repair Ninja",
+      "open": "Rue de la Cerisaie, Paris 4th",
+      "route": "Directions",
+      "call": "Call",
+      "ask": "Where can I buy a guaranteed refurbished iPhone in Paris?",
+      "answer": "Repair Ninja, near Bastille: iPhones tested in the workshop, guaranteed for a year, store pickup.",
+      "sponsored": "Sponsored",
+      "adLine": "iPhones guaranteed for a year, delivered in 48 h.",
+      "order": "New order, 11:10 pm",
+      "orderLine": "iPhone 16 Pro, pickup Saturday 10 am. Paid.",
+      "week": "This week",
+      "tiles": [
+        "Sales",
+        "Website visits",
+        "Calls from Google",
+        "New reviews"
+      ],
+      "fake": "Made-up numbers",
+      "walk": "Directions: 6 min on foot",
+      "tipLabel": "Worth knowing",
+      "tip": "Saturday is your best day."
+    },
+    "endTitle": "Every step, one more customer.",
+    "endBody": "First call free.",
+    "cta": "Book a free call"
+  },
+  "wall": {
+    "label": "Work",
+    "concept": "Concept",
+    "kinds": {
+      "page": "website",
+      "mobile": "phone",
+      "mood": "mood",
+      "type": "type",
+      "palette": "colour",
+      "photo": "photo"
+    },
+    "open": "Open the project",
+    "pause": "Pause the slideshow",
+    "play": "Play the slideshow",
+    "go": "Show project"
+  },
+  "case": {
+    "title": "From a feeling to a storefront.",
+    "label": "Concept",
+    "invented": "An invented business, for the example",
+    "step": "Step",
+    "of": "of",
+    "prev": "Previous",
+    "next": "Next",
+    "seeAll": "See the full project",
+    "moodCaption": "Mood board",
+    "tokensCaption": "Colours taken from the photos",
+    "wireCaption": "The wireframe",
+    "pageCaption": "The site, on desktop and phone"
+  },
+  "packages": {
+    "title": "Clear prices.",
+    "from": "from",
+    "items": [
+      {
+        "name": "Showcase",
+        "price": "€499",
+        "body": "Up to 10 pages, Google listing, local SEO, Google Maps.",
+        "time": "1–2 weeks"
+      },
+      {
+        "name": "Connected",
+        "price": "€1,290",
+        "body": "Showcase + forms, Google Sheets, WhatsApp, Shopify store.",
+        "time": "2–3 weeks"
+      },
+      {
+        "name": "Custom",
+        "price": "€2,900",
+        "body": "AI, unified data, apps, cloud or your own server.",
+        "time": "4+ weeks"
+      }
+    ],
+    "quote": "You send photos and ideas, I build. Deposit only once you like the first draft. Domain and hosting billed separately. VAT not applicable (French micro-business).",
+    "care": [
+      {
+        "title": "Care plan €29 a month",
+        "body": "Updates, monthly Google check, small edits."
+      },
+      {
+        "title": "Care + ads from €149 a month",
+        "body": "Google, Instagram, ChatGPT: I create and tune your ads. Ad budget extra."
+      }
+    ]
+  },
+  "about": {
+    "title": "Walid Birouk.",
+    "body": "AI and data engineer who builds websites for shops. Based in Paris, working worldwide, in English or French.",
+    "photoAlt": "Walid Birouk"
+  },
+  "contact": {
+    "title": "Shall we talk?",
+    "cta": "Book a call",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "note": "Reply within 24 hours.",
+    "formTitle": "Or leave a message",
+    "name": "Your name",
+    "business": "Your business",
+    "message": "Your message",
+    "contactField": "Email or phone",
+    "send": "Send message",
+    "sent": "Message sent. I’ll reply within 24 hours.",
+    "error": "The message didn’t go through. Message me on WhatsApp or by email.",
+    "required": "Add your name and a way to reply to you."
+  },
+  "footer": {
+    "rights": "esPAce, Walid Birouk’s web studio.",
+    "area": "Based in Paris. Clients worldwide."
+  },
+  "work": {
+    "back": "Back to home",
+    "process": "The process",
+    "palette": "Palette",
+    "type": "Type",
+    "preview": "Open the concept page",
+    "live": "Visit the live site",
+    "otherWork": "More work",
+    "cta": "A site like this for your shop?"
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "name": "Café Mama Kin",
+  "kind": "client",
+  "order": 0.2,
+  "flagship": false,
+  "year": 2026,
+  "sector": {
+    "fr": "Café-bar et lieu de soirées",
+    "en": "Café-bar and events venue"
+  },
+  "place": {
+    "fr": "Paris 19e, Pont de l’Ourcq",
+    "en": "Paris 19th, Pont de l’Ourcq"
+  },
+  "idea": {
+    "fr": "Un site qui ressemble au bar : les affiches des soirées en premier, la déco de brocante, et les réponses aux questions de toujours.",
+    "en": "A site that looks like the bar: the event posters first, the flea-market decor, and answers to the usual questions."
+  },
+  "summary": {
+    "fr": "Un bar coloré et surdécoré, plein de soirées (vinyles, ciné, fanzines, dégustations), qu’on ne découvrait qu’en passant devant.",
+    "en": "A colourful, over-decorated bar full of events (vinyl, film, fanzines, tastings) that people only found by walking past."
+  },
+  "palette": [
+    {
+      "name": "Nuit",
+      "hex": "#002147"
+    },
+    {
+      "name": "Orange",
+      "hex": "#FF9C01"
+    },
+    {
+      "name": "Rouge",
+      "hex": "#A40000"
+    },
+    {
+      "name": "Framboise",
+      "hex": "#B4284C"
+    },
+    {
+      "name": "Sauge",
+      "hex": "#9AB48B"
+    },
+    {
+      "name": "Craie",
+      "hex": "#F2F2F2"
+    }
+  ],
+  "type": {
+    "display": {
+      "family": "MMK",
+      "role": {
+        "fr": "Titres, la lettre du bar",
+        "en": "Headings, the bar’s own lettering"
+      }
+    },
+    "body": {
+      "family": "Nunito",
+      "role": {
+        "fr": "Horaires, FAQ, infos",
+        "en": "Hours, FAQ, practical info"
+      }
+    },
+    "sample": "Entre au MamaK, pose-toi."
+  },
+  "steps": [
+    {
+      "id": "need",
+      "title": {
+        "fr": "Le besoin.",
+        "en": "The need."
+      },
+      "body": {
+        "fr": "Des soirées partout, mais on ne les voyait qu’en passant.",
+        "en": "Events all the time, but you only saw them walking past."
+      }
+    },
+    {
+      "id": "mood",
+      "title": {
+        "fr": "L’ambiance.",
+        "en": "The mood."
+      },
+      "body": {
+        "fr": "Les affiches, le rideau tagué, l’enseigne.",
+        "en": "The posters, the tagged shutter, the sign."
+      }
+    },
+    {
+      "id": "tokens",
+      "title": {
+        "fr": "Couleurs et lettres.",
+        "en": "Colour and type."
+      },
+      "body": {
+        "fr": "Bleu nuit, orange, rouge : les couleurs du bar.",
+        "en": "Night blue, orange, red: the bar’s own colours."
+      }
+    },
+    {
+      "id": "structure",
+      "title": {
+        "fr": "La structure.",
+        "en": "The structure."
+      },
+      "body": {
+        "fr": "Événements, à boire, l’équipe, FAQ, contact.",
+        "en": "Events, drinks, the team, FAQ, contact."
+      }
+    },
+    {
+      "id": "page",
+      "title": {
+        "fr": "Le site.",
+        "en": "The website."
+      },
+      "body": {
+        "fr": "Les affiches de la semaine dès l’accueil.",
+        "en": "This week’s posters on the home page."
+      }
+    },
+    {
+      "id": "result",
+      "title": {
+        "fr": "Ce qu’il fait maintenant.",
+        "en": "What it does now."
+      },
+      "body": {
+        "fr": "On voit le programme avant de venir.",
+        "en": "People see what’s on before they come."
+      }
+    }
+  ],
+  "results": [
+    {
+      "label": {
+        "fr": "Événements",
+        "en": "Events"
+      },
+      "title": {
+        "fr": "Les affiches d’abord",
+        "en": "Posters first"
+      },
+      "body": {
+        "fr": "Les prochaines soirées s’affichent en haut de l’accueil, avec une page dédiée.",
+        "en": "Upcoming nights show at the top of the home page, with their own page."
+      }
+    },
+    {
+      "label": {
+        "fr": "Référencement local",
+        "en": "Local SEO"
+      },
+      "title": {
+        "fr": "Adresse, horaires, accès",
+        "en": "Address, hours, directions"
+      },
+      "body": {
+        "fr": "Les mêmes infos partout : adresse, horaires, métro et bus, téléphone, réseaux.",
+        "en": "The same details everywhere: address, hours, metro and bus, phone, socials."
+      }
+    },
+    {
+      "label": {
+        "fr": "FAQ",
+        "en": "FAQ"
+      },
+      "title": {
+        "fr": "Les questions de toujours",
+        "en": "The usual questions"
+      },
+      "body": {
+        "fr": "Bières, à manger, ambiance, réservation : les réponses sont sur le site.",
+        "en": "Beers, food, atmosphere, booking: the answers are on the site."
+      }
+    }
+  ],
+  "fragments": [
+    {
+      "src": "./frag-logo.webp",
+      "alt": {
+        "fr": "L’enseigne du Café Mama Kin",
+        "en": "The Café Mama Kin sign"
+      },
+      "ratio": 0.67,
+      "tones": [
+        "#002147",
+        "#FF9C01"
+      ],
+      "x": 2,
+      "y": 4,
+      "w": 40,
+      "r": -2
+    },
+    {
+      "src": "./frag-vinylobar.webp",
+      "alt": {
+        "fr": "Affiche Vinylobar",
+        "en": "Vinylobar poster"
+      },
+      "ratio": 1.36,
+      "tones": [
+        "#F2F2F2",
+        "#B4284C"
+      ],
+      "x": 45,
+      "y": 3,
+      "w": 16,
+      "r": 3
+    },
+    {
+      "src": "./frag-mamakinoche.webp",
+      "alt": {
+        "fr": "Affiche Mamakinoche",
+        "en": "Mamakinoche poster"
+      },
+      "ratio": 1.39,
+      "tones": [
+        "#FF9C01",
+        "#B4284C"
+      ],
+      "x": 63,
+      "y": 5,
+      "w": 15,
+      "r": -3
+    },
+    {
+      "src": "./frag-fanzines.webp",
+      "alt": {
+        "fr": "Affiche soirée fanzines",
+        "en": "Fanzine night poster"
+      },
+      "ratio": 1.27,
+      "tones": [
+        "#9AB48B",
+        "#F2F2F2"
+      ],
+      "x": 81,
+      "y": 2,
+      "w": 16,
+      "r": 2
+    },
+    {
+      "src": "./frag-devanture.webp",
+      "alt": {
+        "fr": "Le rideau tagué",
+        "en": "The tagged shutter"
+      },
+      "ratio": 1.08,
+      "tones": [
+        "#3D3D3D",
+        "#FF9C01"
+      ],
+      "x": 4,
+      "y": 50,
+      "w": 28,
+      "r": 2
+    },
+    {
+      "src": "./frag-biere.webp",
+      "alt": {
+        "fr": "Affiche La Route de la bière",
+        "en": "Beer route poster"
+      },
+      "ratio": 1.39,
+      "tones": [
+        "#002147",
+        "#FF9C01"
+      ],
+      "x": 36,
+      "y": 48,
+      "w": 18,
+      "r": -2
+    },
+    {
+      "src": "./frag-note.webp",
+      "alt": {
+        "fr": "La note de musique",
+        "en": "The music note"
+      },
+      "ratio": 1.68,
+      "tones": [
+        "#002147",
+        "#FF9C01"
+      ],
+      "x": 60,
+      "y": 52,
+      "w": 12,
+      "r": 4
+    }
+  ],
+  "typeSpecimen": "./type-specimen.webp",
+  "pageDesktop": "./page-desktop.webp",
+  "pageMobile": "./page-mobile.webp",
+  "shotDesktop": "./shot-desktop.webp",
+  "shotMobile": "./shot-mobile.webp",
+  "wireframeDesktop": "wireframe-desktop.svg",
+  "wireframeMobile": "wireframe-mobile.svg",
+  "liveUrl": "https://www.cafemamakin.fr/",
+  "credits": {
+    "fr": "Réalisé avec Aleo. Visuels : Café Mama Kin.",
+    "en": "Made with Aleo. Visuals: Café Mama Kin."
+  },
+  "seo": {
+    "title": {
+      "fr": "Café Mama Kin, site d’un café-bar à Paris 19e",
+      "en": "Café Mama Kin, website for a café-bar in Paris 19th"
+    },
+    "description": {
+      "fr": "Le site d’un café-bar indépendant du 19e : soirées à l’affiche, FAQ, horaires et accès, dans les couleurs du bar.",
+      "en": "The website of an independent café-bar in Paris 19th: events first, FAQ, hours and directions, in the bar’s own colours."
+    }
+  }
+}

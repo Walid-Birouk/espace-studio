@@ -1,0 +1,150 @@
+---
+// The customer story: one customer from search to purchase, and what esPAce sets up at each step. Desktop: the phone stays put (CSS sticky)
+// and its screen changes as each step reaches the middle of the window. Phones: one screen per step.
+// No scroll hijacking, so it stays smooth everywhere and works without JavaScript.
+import { strings, typo, CONTACT, type Lang } from '../i18n';
+import StoryScreen from './StoryScreen.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = strings(lang).story;
+const t = (x: string) => typo(x, lang);
+const booking = CONTACT.booking || '#contact';
+---
+<section class="story section" id="parcours" aria-labelledby="story-title" data-story>
+  <div class="wrap story__head">
+    <h2 id="story-title" class="display-l">{t(s.title)}</h2>
+    {s.intro && <p class="lead">{t(s.intro)}</p>}
+  </div>
+
+  <div class="wrap story__grid">
+    <ol class="story__beats">
+      {s.beats.map((b, i) => (
+        <li class="story__beat" data-beat={i} aria-current={i === 0 ? 'step' : undefined}>
+          <p class="story__time">{t(b.time)}</p>
+          <h3 class="heading">{t(b.title)}</h3>
+          <p class="story__body">{t(b.body)}</p>
+          <p class="story__do"><b>{s.doLabel}</b>{t(b.do)}</p>
+          <div class="story__phone story__phone--inline">
+            <div class="mobile__frame"><div class="mobile__screen"><StoryScreen id={b.id} lang={lang} /></div></div>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <div class="story__stick" aria-hidden="true">
+      <div class="story__phone">
+        <div class="mobile__frame"><div class="mobile__screen story__screens">
+          {s.beats.map((b, i) => (
+            <div class="story__screen" data-screen={i} data-on={i === 0 ? '' : undefined}><StoryScreen id={b.id} lang={lang} /></div>
+          ))}
+        </div></div>
+        <ol class="story__dots">{s.beats.map((_, i) => <li data-dot={i} data-on={i === 0 ? '' : undefined}></li>)}</ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap story__end">
+    <p class="display-l">{t(s.endTitle)}</p>
+    <p class="lead">{t(s.endBody)}</p>
+    <p><a class="btn" href={booking} target={CONTACT.booking ? '_blank' : undefined} rel="noopener">{s.cta}</a></p>
+  </div>
+</section>
+
+<script>
+  // Light the step in the middle of the window and show its screen.
+  const root = document.querySelector<HTMLElement>('[data-story]');
+  if (root && 'IntersectionObserver' in window) {
+    const beats = [...root.querySelectorAll<HTMLElement>('[data-beat]')];
+    const screens = [...root.querySelectorAll<HTMLElement>('[data-screen]')];
+    const dots = [...root.querySelectorAll<HTMLElement>('[data-dot]')];
+    // Each phone screen plays out (typing, pins, cards, counters) when it comes into view.
+    const motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fmt = new Intl.NumberFormat(document.documentElement.lang || 'fr');
+    const timers = new WeakMap<HTMLElement, number[]>();
+    const play = (scr: HTMLElement | null) => {
+      if (!scr || !motion) return;
+      (timers.get(scr) ?? []).forEach(clearTimeout);
+      const ids: number[] = [];
+      scr.classList.remove('is-play');
+      void scr.offsetWidth;
+      scr.querySelectorAll<HTMLElement>('[data-type]').forEach((el) => {
+        const full = el.dataset.type!;
+        el.textContent = '';
+        [...full].forEach((_, k) => ids.push(window.setTimeout(() => { el.textContent = full.slice(0, k + 1); }, 250 + k * 42)));
+      });
+      scr.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
+        const end = Number(el.dataset.count), pre = el.dataset.prefix ?? '', suf = el.dataset.suffix ?? '';
+        const delay = 500, dur = 1100;
+        el.textContent = `${pre}0${suf}`;
+        ids.push(window.setTimeout(() => {
+          const t0 = performance.now();
+          const tick = (now: number) => {
+            const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+            el.textContent = `${pre}${fmt.format(Math.round(end * e))}${suf}`;
+            if (p < 1 && scr.classList.contains('is-play')) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }, delay));
+      });
+      timers.set(scr, ids);
+      scr.classList.add('is-play');
+    };
+    if (motion) root.querySelectorAll<HTMLElement>('.scr').forEach((scr) => scr.classList.add('is-armed'));
+    let current = -1;
+    const show = (i: number) => {
+      beats.forEach((b, k) => (k === i ? b.setAttribute('aria-current', 'step') : b.removeAttribute('aria-current')));
+      [...screens, ...dots].forEach((el) => el.toggleAttribute('data-on', Number(el.dataset.screen ?? el.dataset.dot) === i));
+      if (i !== current && getComputedStyle(root.querySelector('.story__stick')!).display !== 'none') play(screens[i]?.querySelector('.scr'));
+      current = i;
+    };
+    // Phones: each step has its own screen; play it when most of it is on screen.
+    const phoneIo = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) play(e.target.querySelector('.scr')); }),
+      { threshold: 0.55 },
+    );
+    root.querySelectorAll('.story__phone--inline').forEach((el) => phoneIo.observe(el));
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && show(Number((e.target as HTMLElement).dataset.beat))),
+      { rootMargin: '-45% 0px -45% 0px' },
+    );
+    beats.forEach((b) => io.observe(b));
+    root.classList.add('is-live');
+  }
+</script>
+
+<style>
+  .story__head { display: grid; gap: var(--space-3); margin-bottom: var(--space-4); }
+  .story__beats { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-5); }
+  .story__beat { display: grid; gap: var(--space-3); align-content: center; }
+  .story__time { margin: 0; font-family: var(--font-display); font-weight: 700; font-stretch: 80%; font-size: 15px; letter-spacing: .02em; color: var(--enamel); font-variant-numeric: tabular-nums; }
+  .story__body { margin: 0; max-width: 32em; text-wrap: pretty; }
+  .story__do { margin: 0; max-width: 32em; padding-top: var(--space-2); border-top: 1.5px solid var(--ink); display: grid; gap: 2px; text-wrap: pretty; }
+  .story__do b { font-family: var(--font-display); font-stretch: 80%; font-weight: 700; font-size: 15px; color: var(--enamel); }
+  .story__phone { width: min(220px, 62vw); margin-top: var(--space-2); justify-self: center; margin-inline: auto; }
+  .story__stick { display: none; }
+
+  .story__end { display: grid; gap: var(--space-3); justify-items: start; margin-top: var(--space-5); }
+  .story__end p { margin: 0; }
+
+  @media (min-width: 900px) {
+    .story__head { margin-bottom: var(--space-5); }
+    .story__end { margin-top: var(--space-6); }
+    .story__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-6); }
+    .story__beats { gap: 0; }
+    .story__beat { min-height: 70vh; padding-block: var(--space-5); }
+    .story__phone--inline { display: none; }
+    .story__stick { display: block; }
+    .story__stick .story__phone { position: sticky; top: calc(50vh - 290px); width: 270px; margin: 0 auto; }
+    .story__screens { position: relative; }
+    .story__screen { position: absolute; inset: 0; opacity: 0; translate: 0 18px; transition: opacity .45s ease, translate .45s cubic-bezier(.2,.7,.2,1); }
+    .story__screen[data-on] { opacity: 1; translate: 0 0; }
+    .story__dots { list-style: none; display: flex; justify-content: center; gap: 8px; margin: 16px 0 0; padding: 0; }
+    .story__dots li { width: 7px; height: 7px; border-radius: 50%; background: var(--zinc); transition: background .3s; }
+    .story__dots li[data-on] { background: var(--ink); }
+    :global(.is-live) .story__beat { opacity: .32; transition: opacity .4s ease; }
+    :global(.is-live) .story__beat[aria-current] { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .story__screen, .story__beat, .story__dots li { transition: none !important; translate: none !important; }
+  }
+</style>
