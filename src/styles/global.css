@@ -445,3 +445,6 @@ button { font: inherit; color: inherit; }
 .to-top { bottom: calc(max(16px, env(safe-area-inset-bottom, 0px)) + 56px + 12px); }
 @media (min-width: 900px) { .to-top { bottom: calc(32px + 60px + 12px); right: 34px; } }
 @media (max-width: 899px) { .to-top { right: calc(max(16px, env(safe-area-inset-right, 0px)) + 5px); } }
+
+/* Native scrolling; in-page links glide unless reduced motion is on. */
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

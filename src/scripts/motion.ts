@@ -1,8 +1,7 @@
-// Loaded only when motion is allowed (see main.ts). The signature sequence pins and shows
+// Loaded only when motion is allowed (see main.ts). Scrolling stays native everywhere. The signature sequence pins and shows
 // a project becoming finished: idea -> token -> sketch -> page.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,27 +11,6 @@ const EASE = 'power2.inOut';
 
 export function start() {
   document.documentElement.classList.add('motion');
-
-  // Smooth scroll on desktop pointers only; native scroll on touch.
-  if (matchMedia('(pointer: fine) and (min-width: 900px)').matches) {
-    const lenis = new Lenis({ lerp: 0.2, wheelMultiplier: 1.1, syncTouch: false });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((t) => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-    document.addEventListener('click', (e) => {
-      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"], a[href*="/#"]');
-      if (!a) return;
-      const url = new URL(a.href);
-      if (url.pathname !== location.pathname || !url.hash) return;
-      const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
-      if (!target) return;
-      e.preventDefault();
-      lenis.scrollTo(target, { offset: 0 });
-      history.pushState(null, '', url.hash);
-      target.setAttribute('tabindex', '-1');
-      target.focus({ preventScroll: true });
-    });
-  }
 
   const mm = gsap.matchMedia();
   mm.add('(min-width: 900px)', () => {

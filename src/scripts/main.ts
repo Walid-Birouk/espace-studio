@@ -218,9 +218,7 @@ if (toTop) {
   const check = () => { toTop.toggleAttribute('data-show', scrollY > innerHeight * 0.9); ticking = false; };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(check); } }, { passive: true });
   check();
-  // With Lenis running (desktop), its own anchor handler scrolls smoothly. Otherwise scroll here.
   toTop.addEventListener('click', (e) => {
-    if (document.documentElement.classList.contains('lenis')) return;
     e.preventDefault();
     scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     $('#top')?.focus({ preventScroll: true });
