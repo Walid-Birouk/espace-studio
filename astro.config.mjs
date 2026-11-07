@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const SITE = 'https://espace-studio.vercel.app';
+const SITE = 'https://espa-studio.fr';
 
 export default defineConfig({
   site: SITE,
