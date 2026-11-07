@@ -103,7 +103,7 @@ if (wallVp && wallCtrl) {
     idx = i;
     dots.forEach((d, k) => { d.parentElement!.toggleAttribute('data-on', k === i); d.parentElement!.toggleAttribute('data-done', k < i); });
   };
-  const running = () => !userPaused && !hold && onScreen && !document.hidden && Date.now() >= resumeAt;
+  const running = () => !userPaused && !hold && !pageScrolling && onScreen && !document.hidden && Date.now() >= resumeAt;
   const sync = () => {
     wallCtrl.toggleAttribute('data-running', running());
     pauseBtn.setAttribute('aria-pressed', String(userPaused));
@@ -145,6 +145,13 @@ if (wallVp && wallCtrl) {
   dots.forEach((d, k) => d.addEventListener('click', () => { resumeAt = Date.now() + 8000; go(k); }));
   pauseBtn.addEventListener('click', () => { userPaused = !userPaused; resumeAt = 0; restart(); });
   document.addEventListener('visibilitychange', restart);
+  // Don't slide the carousel while the page itself is scrolling (smoother on low-end phones).
+  let pageT = 0, pageScrolling = false;
+  addEventListener('scroll', () => {
+    if (!pageScrolling) { pageScrolling = true; clearTimeout(timer); }
+    clearTimeout(pageT);
+    pageT = window.setTimeout(() => { pageScrolling = false; restart(); }, 700);
+  }, { passive: true });
   new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; restart(); }, { threshold: 0.3 }).observe(wallVp);
   // Grab and throw with the mouse, like a map: hold, drag, let go fast and it glides.
   // (Touch and trackpads already scroll natively, with their own momentum.)

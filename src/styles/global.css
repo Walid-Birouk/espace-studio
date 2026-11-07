@@ -448,3 +448,22 @@ button { font: inherit; color: inherit; }
 
 /* Native scrolling; in-page links glide unless reduced motion is on. */
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* Contact with the form: title and ways to reach me on the left, the form on the right. */
+@media (min-width: 900px) {
+  .contact__inner:has(> form) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; row-gap: var(--space-5); }
+  .contact__inner:has(> form) .contact__head { grid-column: 1; grid-row: 1; }
+  .contact__inner:has(> form) .contact__side { grid-column: 1; grid-row: 2; max-width: 460px; }
+  .contact__inner:has(> form) > form { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; max-width: none; align-self: start; }
+}
+.form .title { margin: 0; font-size: 20px; }
+.contact__inner > form { margin-top: 0; }
+
+/* Phones: the project carousel is the heaviest thing to scroll. Flat paper (no blurred shadows),
+   painting kept inside the carousel, and no auto-slide while the page itself is being scrolled. */
+@media (max-width: 899px) {
+  .wall__viewport { contain: layout paint; }
+  .piece__frame { box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 10%, transparent); transition: none; }
+  .piece__frame--phone { box-shadow: none; }
+  .mini { box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent); }
+}
