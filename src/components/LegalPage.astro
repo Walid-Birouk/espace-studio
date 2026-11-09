@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import { typo, path, CONTACT, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const fr = lang === 'fr';
+const t = (s: string) => typo(s, lang);
+---
+<Base
+  lang={lang}
+  title={fr ? 'Mentions légales, esPAce' : 'Legal notice, esPAce'}
+  description={fr ? 'Éditeur, hébergement et données personnelles du site esPAce.' : 'Publisher, hosting and personal data for the esPAce website.'}
+  route="/mentions-legales/"
+>
+  <article class="wrap legal">
+    <a class="link" href={path('/', lang)}>{fr ? 'Retour à l’accueil' : 'Back to home'}</a>
+    <h1 class="display-l">{fr ? 'Mentions légales' : 'Legal notice'}</h1>
+
+    <section>
+      <h2>{fr ? 'Éditeur' : 'Publisher'}</h2>
+      <p>{CONTACT.name}, esPAce<br />Rue de l’Ourcq, 75019 Paris, France<br />
+        <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> · <a href={`tel:${CONTACT.phone}`}>{CONTACT.phoneDisplay}</a></p>
+      <p>{t(fr ? 'Directeur de la publication : ' : 'Publication director: ')}{CONTACT.name}</p>
+    </section>
+
+    <section>
+      <h2>{fr ? 'Hébergement' : 'Hosting'}</h2>
+      <p>Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, {fr ? 'États-Unis' : 'United States'}<br /><a href="https://vercel.com" rel="noopener">vercel.com</a></p>
+    </section>
+
+    <section>
+      <h2>{fr ? 'Données personnelles' : 'Personal data'}</h2>
+      {fr ? <>
+        <p>{t('Le formulaire de contact envoie votre nom, votre e-mail et votre message par Web3Forms. Ces données servent uniquement à vous répondre et ne sont ni vendues ni partagées.')}</p>
+        <p>{t('La prise de rendez-vous se fait sur Cal.com, qui applique sa propre politique de confidentialité.')}</p>
+        <p>{t('Ce site n’utilise ni cookies publicitaires ni outil de suivi. Seul votre choix de thème clair ou sombre est gardé dans votre navigateur.')}</p>
+        <p>{t('Vous pouvez demander l’accès, la correction ou la suppression de vos données en écrivant à ')}<a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>{t('. Vous pouvez aussi saisir la CNIL (cnil.fr).')}</p>
+      </> : <>
+        <p>The contact form sends your name, e-mail and message through Web3Forms. This data is used only to reply to you and is never sold or shared.</p>
+        <p>Bookings are handled by Cal.com, under its own privacy policy.</p>
+        <p>This site uses no advertising cookies and no tracking. Only your light or dark theme choice is kept in your browser.</p>
+        <p>To access, correct or delete your data, write to <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>. You can also contact the CNIL (cnil.fr).</p>
+      </>}
+    </section>
+
+    <section>
+      <h2>{fr ? 'Propriété intellectuelle' : 'Intellectual property'}</h2>
+      <p>{t(fr
+        ? 'Les textes, visuels et le code de ce site appartiennent à esPAce. Les marques et sites des clients présentés restent la propriété de leurs titulaires.'
+        : 'The text, visuals and code of this site belong to esPAce. Client brands and websites shown remain the property of their owners.')}</p>
+    </section>
+  </article>
+</Base>

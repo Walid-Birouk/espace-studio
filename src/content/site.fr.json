@@ -133,8 +133,8 @@
     "items": [
       {
         "name": "Vitrine",
-        "price": "499 €",
-        "body": "Jusqu’à 10 pages, fiche Google, référencement local, plan Google Maps.",
+        "price": "690 €",
+        "body": "Jusqu’à 5 pages, fiche Google, référencement local, plan Google Maps.",
         "time": "1 à 2 semaines"
       },
       {
@@ -150,11 +150,15 @@
         "time": "4 semaines et plus"
       }
     ],
-    "quote": "Vous envoyez photos et idées, je construis. Acompte seulement quand la première maquette vous plaît. Domaine et hébergement facturés à part. TVA non applicable, art. 293 B du CGI.",
+    "quote": "Vous envoyez photos et idées, je construis. Acompte seulement quand la première maquette vous plaît. Nom de domaine facturé à part. TVA non applicable, art. 293 B du CGI.",
     "care": [
       {
-        "title": "Suivi 29 € par mois",
-        "body": "Mises à jour, contrôle Google mensuel, petites retouches."
+        "title": "Site en abonnement : 0 € à la commande, 79 € par mois",
+        "body": "Le site Vitrine et le suivi, sans rien payer au départ. Engagement 12 mois."
+      },
+      {
+        "title": "Suivi 39 € par mois",
+        "body": "Hébergement, mises à jour, contrôle Google mensuel, petites retouches."
       },
       {
         "title": "Suivi + publicités dès 149 € par mois",

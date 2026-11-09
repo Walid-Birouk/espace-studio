@@ -127,7 +127,10 @@ const ld = [business, ...jsonld];
       <div class="wrap">
         <p>© {new Date().getFullYear()} esPAce · Walid Birouk</p>
         <p>{typo(s.footer.area, lang)}</p>
-        <a href={CONTACT.linkedin} rel="noopener">LinkedIn</a>
+        <nav aria-label={lang === 'fr' ? 'Pied de page' : 'Footer'}>
+          <a href={path('/mentions-legales/', lang)}>{lang === 'fr' ? 'Mentions légales' : 'Legal notice'}</a>
+          <a href={CONTACT.linkedin} rel="noopener">LinkedIn</a>
+        </nav>
       </div>
     </footer>
     <a class="wa-fab" href={CONTACT.whatsapp} rel="noopener" target="_blank" aria-label="WhatsApp"><WaIcon size={28} /></a>

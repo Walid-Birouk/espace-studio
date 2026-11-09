@@ -133,8 +133,8 @@
     "items": [
       {
         "name": "Showcase",
-        "price": "€499",
-        "body": "Up to 10 pages, Google listing, local SEO, Google Maps.",
+        "price": "€690",
+        "body": "Up to 5 pages, Google listing, local SEO, Google Maps.",
         "time": "1–2 weeks"
       },
       {
@@ -150,11 +150,15 @@
         "time": "4+ weeks"
       }
     ],
-    "quote": "You send photos and ideas, I build. Deposit only once you like the first draft. Domain and hosting billed separately. VAT not applicable (French micro-business).",
+    "quote": "You send photos and ideas, I build. Deposit only once you like the first draft. Domain name billed separately. VAT not applicable (French micro-business).",
     "care": [
       {
-        "title": "Care plan €29 a month",
-        "body": "Updates, monthly Google check, small edits."
+        "title": "Website subscription: €0 upfront, €79 a month",
+        "body": "The Showcase site plus the care plan, nothing to pay at the start. 12-month minimum."
+      },
+      {
+        "title": "Care plan €39 a month",
+        "body": "Hosting, updates, monthly Google check, small edits."
       },
       {
         "title": "Care + ads from €149 a month",
