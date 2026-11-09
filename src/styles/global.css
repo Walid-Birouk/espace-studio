@@ -130,11 +130,11 @@ button { font: inherit; color: inherit; }
 }
 @media (min-width: 900px) { .wall__intro { margin-bottom: var(--space-5); } }
 .wall__title { font-family: var(--font-display); font-weight: 800; font-stretch: 70%; font-size: clamp(46px, 12vw, 104px); line-height: .9; letter-spacing: -0.012em; text-wrap: balance; }
-.wall__line { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.35; max-width: 26em; }
+.wall__line { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.45; max-width: 26em; }
 /* What the client pays for: four plain outcomes, each marked by a short rule, no bullets. */
-.wall__wants { list-style: none; margin: 0; padding: 0; display: grid; gap: .45em; }
+.wall__wants { list-style: none; margin: 0; padding: 0; display: grid; gap: .35em; }
 .wall__wants li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: baseline; text-wrap: pretty; }
-.wall__wants li::before { content: ""; display: block; height: 1.5px; background: var(--enamel); align-self: start; margin-top: .62em; }
+.wall__wants li::before { content: ""; display: block; height: 1.5px; background: var(--enamel); align-self: start; margin-top: .68em; }
 .wall__where { margin-top: var(--space-3); }
 .wall__hint { display: flex; align-items: center; gap: 12px; }
 .wall__rule { display: block; width: 48px; height: 1.5px; background: var(--ink); transform-origin: 0 50%; }
