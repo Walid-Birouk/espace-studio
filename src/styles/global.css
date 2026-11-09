@@ -131,10 +131,9 @@ button { font: inherit; color: inherit; }
 @media (min-width: 900px) { .wall__intro { margin-bottom: var(--space-5); } }
 .wall__title { font-family: var(--font-display); font-weight: 800; font-stretch: 70%; font-size: clamp(46px, 12vw, 104px); line-height: .9; letter-spacing: -0.012em; text-wrap: balance; }
 .wall__line { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.45; max-width: 26em; }
-/* What the client pays for: four plain outcomes, each marked by a short rule, no bullets. */
-.wall__wants { list-style: none; margin: 0; padding: 0; display: grid; gap: .35em; }
-.wall__wants li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: baseline; text-wrap: pretty; }
-.wall__wants li::before { content: ""; display: block; height: 1.5px; background: var(--enamel); align-self: start; margin-top: .68em; }
+/* What the client pays for: four plain lines, no bullets or marks, so every left edge lines up. */
+.wall__wants { list-style: none; margin: 0; padding: 0; display: grid; gap: .5em; }
+.wall__wants li { text-wrap: pretty; }
 .wall__where { margin-top: var(--space-3); }
 .wall__hint { display: flex; align-items: center; gap: 12px; }
 .wall__rule { display: block; width: 48px; height: 1.5px; background: var(--ink); transform-origin: 0 50%; }
@@ -417,10 +416,11 @@ button { font: inherit; color: inherit; }
 .wall__intro > * { max-width: 760px; }
 @media (min-width: 900px) {
   .wall { padding-top: calc(env(safe-area-inset-top, 0px) + 80px + var(--space-5)); }
-  .wall__intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--space-6); row-gap: var(--space-3); align-items: end; }
+  .wall__intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--space-6); row-gap: var(--space-3); align-items: start; }
   .wall__intro > * { max-width: none; }
   .wall__title { grid-column: 1; grid-row: 1 / span 2; }
-  .wall__line { grid-column: 2; grid-row: 1; }
+  /* Tops aligned: the title's cap line and the list's first line start at the same height. */
+  .wall__line { grid-column: 2; grid-row: 1; padding-top: .1em; }
   .wall__intro .actions { grid-column: 2; grid-row: 2; }
   .wall__hint { grid-column: 1 / -1; grid-row: 3; margin-top: var(--space-4); }
 }
