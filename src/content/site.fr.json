@@ -21,7 +21,13 @@
   },
   "hero": {
     "title": "Plus de clients, en ligne et en boutique.",
-    "line": "Site, Google, publicités, vente en ligne, vos chiffres. Basé à Paris, pour les commerces du monde entier.",
+    "wants": [
+      "Être trouvé sur Google et ChatGPT quand on cherche près de chez vous.",
+      "Plus de monde qui pousse la porte.",
+      "Des ventes même quand la boutique est fermée.",
+      "Savoir ce qui marche, en un coup d’œil."
+    ],
+    "line": "Basé à Paris, pour les commerces d’ici et d’ailleurs.",
     "cta": "Prendre rendez-vous",
     "whatsapp": "WhatsApp",
     "hint": "Projets récents"

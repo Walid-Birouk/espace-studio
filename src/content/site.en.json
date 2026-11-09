@@ -21,7 +21,13 @@
   },
   "hero": {
     "title": "More customers, online and in store.",
-    "line": "Website, Google, ads, online sales, your numbers. Based in Paris, for shops anywhere.",
+    "wants": [
+      "Be found on Google and ChatGPT when people search near you.",
+      "More people walking through the door.",
+      "Sales even when the shop is closed.",
+      "Know what works, at a glance."
+    ],
+    "line": "Based in Paris, for shops here and anywhere.",
     "cta": "Book a free call",
     "whatsapp": "WhatsApp",
     "hint": "Recent work"

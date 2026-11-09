@@ -23,7 +23,10 @@ const tilt = [-1.2, 0.8, -0.6, 1.4, -1.6, 0.5, 1.1];
 <section class="wall" id="travaux" aria-labelledby="wall-title" data-wall>
   <div class="wall__intro wrap" data-wall-intro>
     <h1 id="wall-title" class="wall__title">{typo(s.hero.title, lang)}</h1>
-    <p class="wall__line">{typo(s.hero.line, lang)}</p>
+    <div class="wall__line">
+      <ul class="wall__wants">{s.hero.wants.map((w) => <li>{typo(w, lang)}</li>)}</ul>
+      <p class="wall__where caption">{typo(s.hero.line, lang)}</p>
+    </div>
     <div class="actions">
       <a class="btn" href={booking} target={CONTACT.booking ? '_blank' : undefined} rel="noopener">{s.hero.cta}</a>
       <a class="link link--wa" href={CONTACT.whatsapp} rel="noopener"><WaIcon />{s.hero.whatsapp}</a>
