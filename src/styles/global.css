@@ -538,17 +538,3 @@ button { font: inherit; color: inherit; }
   will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) { .wall__board, .piece { transform: none; will-change: auto; } }
-
-/* ---- Hero stage ---- */
-/* The hero is a full stage: text in front, the WebGL field of project pieces behind (scripts/stage.ts). */
-.hero { position: relative; display: grid; align-content: center; min-height: calc(100svh - 80px - env(safe-area-inset-top, 0px)); }
-@media (min-width: 900px) { .hero { min-height: calc(100svh - 80px - var(--space-5) - env(safe-area-inset-top, 0px)); } }
-.stage { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; display: block; }
-.hero > .wall__intro { position: relative; z-index: 1; }
-/* Once the stage is live, a soft pool of paper keeps the headline readable where cards cross behind it. */
-.hero[data-live]::before {
-  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(ellipse 58% 64% at 30% 42%, color-mix(in srgb, var(--paper) 88%, transparent), transparent 72%);
-}
-@media (max-width: 899px) { .hero[data-live]::before { background: radial-gradient(ellipse 90% 60% at 50% 40%, color-mix(in srgb, var(--paper) 78%, transparent), transparent 75%); } }
-@media (prefers-reduced-motion: reduce) { .stage { display: none; } }

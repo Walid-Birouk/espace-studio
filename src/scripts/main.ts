@@ -84,8 +84,8 @@ if (wallVp && wallCtrl) {
   const titles = [...wallVp.querySelectorAll<HTMLElement>('.cluster__title')];
   const dots = [...wallCtrl.querySelectorAll<HTMLButtonElement>('[data-wall-go]')];
   const pauseBtn = wallCtrl.querySelector<HTMLButtonElement>('[data-wall-pause]')!;
-  // Steady pace in pixels per second (a screen width in about 15 s on desktop; quicker on phones, where a screen is narrow).
-  const SPEED = matchMedia('(pointer: coarse)').matches ? 60 : 95;
+  // Crosses one screen width in about 30 s: slow enough to look at each piece as it passes.
+  const SCREEN_SECONDS = 30;
   let idx = 0, timer = 0, userPaused = matchMedia('(prefers-reduced-motion: reduce)').matches, hold = false, onScreen = true, resumeAt = 0;
   let raf = 0, pos = 0, lastFrame = 0, endAt = 0;
   // Mouse over the wall: ease to a third of the speed, so a piece is easy to click but the wall never freezes.
@@ -148,7 +148,7 @@ if (wallVp && wallCtrl) {
       if (t - endAt > 2500) { endAt = 0; go(0); return; }
     } else {
       speed += ((hover ? 0.35 : 1) - speed) * 0.06;
-      pos = Math.min(maxLeft(), pos + SPEED * speed * (dt / 1000));
+      pos = Math.min(maxLeft(), pos + (wallVp.clientWidth / SCREEN_SECONDS) * speed * (dt / 1000));
       wallVp.scrollLeft = pos;
     }
     progress();
@@ -179,17 +179,7 @@ if (wallVp && wallCtrl) {
     }, 120);
   }, { passive: true });
   const nudge = () => { resumeAt = Date.now() + 8000; restart(); };
-  // A finger on the wall only counts as a swipe if it moves sideways. Scrolling the page down with a thumb
-  // that happens to start on the wall must not stop the drift.
-  let t0x = 0, t0y = 0, tDecided = false;
-  wallVp.addEventListener('touchstart', (e) => { t0x = e.touches[0].clientX; t0y = e.touches[0].clientY; tDecided = false; }, { passive: true });
-  wallVp.addEventListener('touchmove', (e) => {
-    if (tDecided) return;
-    const dx = Math.abs(e.touches[0].clientX - t0x), dy = Math.abs(e.touches[0].clientY - t0y);
-    if (dx < 6 && dy < 6) return;
-    tDecided = true;
-    if (dx > dy) nudge();
-  }, { passive: true });
+  wallVp.addEventListener('touchstart', nudge, { passive: true });
   wallVp.addEventListener('wheel', (e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) nudge(); }, { passive: true });
   wallVp.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
   wallVp.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') hover = true; }, { passive: true });
@@ -340,17 +330,4 @@ if (!reduce.matches) {
   const start = () => import('./motion').then((m) => m.start());
   if (document.readyState === 'complete') requestAnimationFrame(start);
   else addEventListener('load', () => requestAnimationFrame(start), { once: true });
-}
-
-// ---- Hero stage (WebGL, lazy): only after the page is usable, and never on reduced motion, data saver or weak devices ----
-{
-  const canvas = document.querySelector<HTMLCanvasElement>('[data-stage]');
-  const data = document.querySelector<HTMLScriptElement>('[data-stage-cards]');
-  const nav = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
-  const weak = (nav.hardwareConcurrency ?? 4) <= 2 || (nav.deviceMemory ?? 4) <= 2 || nav.connection?.saveData === true;
-  if (canvas && data && !weak && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const start = () => import('./stage').then((m) => m.mountStage(canvas, JSON.parse(data.textContent || '[]'))).catch(() => {});
-    const idle = () => ('requestIdleCallback' in window ? requestIdleCallback(start, { timeout: 2500 }) : setTimeout(start, 600));
-    if (document.readyState === 'complete') idle(); else addEventListener('load', idle, { once: true });
-  }
 }
