@@ -116,7 +116,6 @@ button { font: inherit; color: inherit; }
   max-height: 900px;
   overflow-x: auto; overflow-y: hidden;
   overscroll-behavior-x: contain;
-  scroll-snap-type: x proximity;
   scroll-padding-left: var(--space-3);
   scrollbar-width: none;
   outline: none;
@@ -520,3 +519,22 @@ button { font: inherit; color: inherit; }
   .wall__offers li:first-child a { padding-left: 0; }
   .wall__intro .wall__hint { grid-row: 4; }
 }
+
+/* Snapping is for thumbs: on a phone a swipe lands on a project. With a mouse the strip just drifts and never jumps back. */
+@media (pointer: coarse) { .wall__viewport { scroll-snap-type: x proximity; } }
+
+/* ---- Depth ---- */
+/* --d (0.2 far … 0.9 near) is set per piece in Wall.astro. Near pieces run a little ahead of the drift, far ones lag,
+   and every piece leans away from the mouse by its depth. The board itself tilts a few degrees toward the cursor. */
+.wall__board {
+  transform: perspective(1600px) rotateY(calc(var(--mx, 0) * 6deg)) rotateX(calc(var(--my, 0) * -3.5deg));
+  transform-origin: calc(var(--sx, 0) * 1px + 50cqw) 50%;
+  will-change: transform;
+}
+.piece {
+  transform: translate3d(
+    calc(var(--sx, 0) * (0.5 - var(--d)) * 0.16px + var(--mx, 0) * var(--d) * -40px),
+    calc(var(--my, 0) * var(--d) * -26px), 0);
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) { .wall__board, .piece { transform: none; will-change: auto; } }

@@ -88,6 +88,9 @@ if (wallVp && wallCtrl) {
   const SCREEN_SECONDS = 30;
   let idx = 0, timer = 0, userPaused = matchMedia('(prefers-reduced-motion: reduce)').matches, hold = false, onScreen = true, resumeAt = 0;
   let raf = 0, pos = 0, lastFrame = 0, endAt = 0;
+  // Mouse over the wall: ease to a third of the speed, so a piece is easy to click but the wall never freezes.
+  // (A full stop was the bug: scrolling the page slid the wall under the resting cursor and it halted mid-read.)
+  let hover = false, speed = 1;
   // Line each project up with the page's text edge (the controls row is a .wrap, so it knows that edge).
   const board = wallVp.querySelector<HTMLElement>('[data-wall-board]')!;
   let edge = 16, ml = 0;
@@ -118,7 +121,7 @@ if (wallVp && wallCtrl) {
     const f = Math.min(1, Math.max(0, (x - left(k)) / Math.max(1, end - left(k))));
     dots[k].querySelector('b')!.style.transform = `scaleX(${f})`;
   };
-  const running = () => !userPaused && !hold && !pageScrolling && onScreen && !document.hidden && Date.now() >= resumeAt;
+  const running = () => !userPaused && !hold && onScreen && !document.hidden && Date.now() >= resumeAt;
   const sync = () => {
     wallCtrl.toggleAttribute('data-running', running());
     pauseBtn.setAttribute('aria-pressed', String(userPaused));
@@ -144,7 +147,8 @@ if (wallVp && wallCtrl) {
       if (!endAt) endAt = t;
       if (t - endAt > 2500) { endAt = 0; go(0); return; }
     } else {
-      pos = Math.min(maxLeft(), pos + (wallVp.clientWidth / SCREEN_SECONDS) * (dt / 1000));
+      speed += ((hover ? 0.35 : 1) - speed) * 0.06;
+      pos = Math.min(maxLeft(), pos + (wallVp.clientWidth / SCREEN_SECONDS) * speed * (dt / 1000));
       wallVp.scrollLeft = pos;
     }
     progress();
@@ -177,21 +181,16 @@ if (wallVp && wallCtrl) {
   const nudge = () => { resumeAt = Date.now() + 8000; restart(); };
   wallVp.addEventListener('touchstart', nudge, { passive: true });
   wallVp.addEventListener('wheel', (e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) nudge(); }, { passive: true });
-  wallVp.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { hold = true; restart(); } });
-  wallVp.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { hold = false; restart(); } });
+  wallVp.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
+  wallVp.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') hover = true; }, { passive: true });
+  wallVp.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') hover = false; });
   wallVp.addEventListener('focusin', () => { hold = true; restart(); });
   wallVp.addEventListener('focusout', () => { hold = false; restart(); });
   dots.forEach((d, k) => d.addEventListener('click', () => { resumeAt = Date.now() + 8000; go(k); }));
   pauseBtn.addEventListener('click', () => { userPaused = !userPaused; resumeAt = 0; restart(); });
   document.addEventListener('visibilitychange', restart);
-  // Don't slide the carousel while the page itself is scrolling (smoother on low-end phones).
-  let pageT = 0, pageScrolling = false;
-  addEventListener('scroll', () => {
-    if (!pageScrolling) { pageScrolling = true; clearTimeout(timer); cancelAnimationFrame(raf); wallVp.classList.remove('is-drifting'); }
-    clearTimeout(pageT);
-    pageT = window.setTimeout(() => { pageScrolling = false; restart(); }, 700);
-  }, { passive: true });
-  new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; restart(); }, { threshold: 0.3 }).observe(wallVp);
+  // Keeps drifting while any of it is on screen (reading the text below must not stop it); rests once fully out of view.
+  new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; restart(); }, { threshold: 0.01 }).observe(wallVp);
   // Grab and throw with the mouse, like a map: hold, drag, let go fast and it glides.
   // (Touch and trackpads already scroll natively, with their own momentum.)
   let down = false, moved = false, startX = 0, startLeft = 0, lastX = 0, lastT = 0, vel = 0, glide = 0;
@@ -235,6 +234,27 @@ if (wallVp && wallCtrl) {
 
   mark(0);
   restart();
+
+  // ---- Depth: each piece moves at its own speed as the wall drifts, and the wall leans toward the mouse ----
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const wall = wallVp.closest<HTMLElement>('[data-wall]') ?? wallVp;
+    let tx = 0, ty = 0, mx = 0, my = 0, lean = 0;
+    const settle = () => {
+      mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
+      board.style.setProperty('--mx', mx.toFixed(3)); board.style.setProperty('--my', my.toFixed(3));
+      lean = Math.abs(tx - mx) > 0.002 || Math.abs(ty - my) > 0.002 ? requestAnimationFrame(settle) : 0;
+    };
+    const aim = (x: number, y: number) => { tx = x; ty = y; if (!lean) lean = requestAnimationFrame(settle); };
+    wall.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const r = wallVp.getBoundingClientRect();
+      aim(((e.clientX - r.left) / r.width - 0.5) * 2, ((e.clientY - r.top) / r.height - 0.5) * 2);
+    });
+    wall.addEventListener('pointerleave', () => aim(0, 0));
+    const track = () => board.style.setProperty('--sx', String(Math.round(wallVp.scrollLeft)));
+    wallVp.addEventListener('scroll', track, { passive: true });
+    track();
+  }
 }
 
 // ---- Theme toggle: remembers the choice; otherwise follows the system ----
