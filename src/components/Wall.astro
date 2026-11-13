@@ -4,7 +4,7 @@ import WaIcon from './WaIcon.astro';
 // A carousel: native horizontal swipe, plus auto-advance one project every few seconds (main.ts),
 // with a progress signal under it. Pauses on hover, touch, focus and with reduced motion.
 // Positions are in cqh (1/100 of the board height), so the board scales with the screen.
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { strings, tr, typo, path, CONTACT, type Lang } from '../i18n';
 
@@ -14,6 +14,22 @@ const s = strings(lang);
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const booking = CONTACT.booking || '#contact';
 
+// The hero stage (scripts/stage.ts, lazy WebGL): the real pieces of every project float in depth behind the headline
+// and fly past the camera as you scroll. Small textures only; the stage loads after everything else.
+type StageCard = { src?: string; color?: string; ratio: number; size: number };
+const card = async (img: ImageMetadata, width: number, size: number): Promise<StageCard> => {
+  const o = await getImage({ src: img, width, format: 'webp', quality: 70 });
+  return { src: o.src, ratio: img.height / img.width, size };
+};
+const stage: StageCard[] = [];
+for (const { data: p } of projects) {
+  stage.push(await card(p.shotDesktop, 560, 1.9));
+  stage.push(await card(p.shotMobile, 240, 0.8));
+  for (const fr of p.fragments.slice(0, 3)) stage.push(await card(fr.src, 320, 1.15));
+  stage.push(await card(p.typeSpecimen, 280, 1.0));
+  for (const c of p.palette.slice(0, 2)) stage.push({ color: c.hex, ratio: 1, size: 0.55 });
+}
+
 const STRIDE = 206; // width of one project cluster
 const boardW = 6 + projects.length * STRIDE + 6;
 
@@ -21,6 +37,9 @@ const boardW = 6 + projects.length * STRIDE + 6;
 const tilt = [-1.2, 0.8, -0.6, 1.4, -1.6, 0.5, 1.1];
 ---
 <section class="wall" id="travaux" aria-labelledby="wall-title" data-wall>
+  <div class="hero" data-hero>
+  <canvas class="stage" data-stage aria-hidden="true"></canvas>
+  <script type="application/json" data-stage-cards set:html={JSON.stringify(stage)} />
   <div class="wall__intro wrap" data-wall-intro>
     <h1 id="wall-title" class="wall__title">{typo(s.hero.title, lang)}</h1>
     <div class="wall__line">
@@ -37,6 +56,7 @@ const tilt = [-1.2, 0.8, -0.6, 1.4, -1.6, 0.5, 1.1];
       ))}
     </ul>
     <p class="wall__hint caption" aria-hidden="true"><span class="wall__rule"></span>{typo(s.hero.hint, lang)}</p>
+  </div>
   </div>
   <div class="wall__viewport" data-wall-viewport tabindex="-1">
     <div class="wall__board" data-wall-board style={`--board-w:${boardW}`}>
