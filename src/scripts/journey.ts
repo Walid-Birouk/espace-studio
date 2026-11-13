@@ -35,14 +35,24 @@ export function journey(root: HTMLElement) {
   // A smooth S-curve through the anchors: vertical tangents, so the path only ever goes down.
   const build = () => {
     const base = root.getBoundingClientRect();
-    // Phones: the line runs down the left margin beside the steps instead of through them.
     const narrow = matchMedia('(max-width: 899px)').matches;
-    const mid = narrow ? anchors.map((a) => ({ x: 22, y: centre(a, base).y })) : anchors.map((a) => centre(a, base));
+    let mid = anchors.map((a) => centre(a, base));
+    // Phones: the copy card sits between two phones and would hide the crossing, so the line drops straight out of a
+    // phone, crosses in the open gap above the next card, then runs straight down behind it.
+    if (narrow) {
+      mid = mid.flatMap((p, i) => {
+        const next = steps[i + 1]?.querySelector('.story__copy');
+        if (!next) return [p];
+        const from = anchors[i].getBoundingClientRect().bottom - base.top + 6;
+        const to = next.getBoundingClientRect().top - base.top - 6;
+        return to - from > 40 ? [p, { x: p.x, y: from }, { x: mid[i + 1].x, y: to }] : [p];
+      });
+    }
     const pts = [centre(start, base), ...mid, centre(end, base)];
     let d = `M${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
     for (let i = 1; i < pts.length; i++) {
       const a = pts[i - 1], b = pts[i];
-      const k = Math.max(40, (b.y - a.y) * (narrow ? 0.5 : 0.75));
+      const k = a.x === b.x ? (b.y - a.y) / 3 : Math.max(narrow ? 0 : 40, (b.y - a.y) * (narrow ? 0.6 : 0.75));
       d += ` C${a.x.toFixed(1)} ${(a.y + k).toFixed(1)} ${b.x.toFixed(1)} ${(b.y - k).toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
     }
     const w = Math.ceil(base.width), h = Math.ceil(base.height);

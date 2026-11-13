@@ -1,7 +1,7 @@
 ---
 // Customer story as a journey (after myrak.ch/methode): one line snakes from the title's full stop, behind each phone,
 // to the closing line. It draws as you scroll; a dot rides its tip; the step in the middle of the window lights up;
-// the line merges into the final dot. Desktop: copy and phone alternate sides. Phone: the line runs down the left.
+// the line merges into the final dot. Desktop: copy and phone alternate sides. Phone: phones alternate right and left, so the line crosses the screen too.
 // Reduced motion: the line is drawn in full, nothing moves. Logic in scripts/journey.ts.
 import { strings, typo, CONTACT, type Lang } from '../i18n';
 import StoryScreen from './StoryScreen.astro';
@@ -149,10 +149,11 @@ const stepId = (i: number) => `${lang === 'fr' ? 'etape' : 'step'}-${i + 1}`;
   .story__end { margin-top: var(--space-6, 64px); display: grid; gap: var(--space-3); }
 
   @media (max-width: 899px) {
-    .story__head, .story__beats, .story__end { padding-left: calc(var(--space-3) + 34px); }
-    .story__beat { padding-top: calc(var(--space-5) + 28px); }
+    .story__beat { padding-top: calc(var(--space-6) + 40px); gap: var(--space-5); }
     .story__num { top: 0; font-size: 104px; }
-    .story__phone { justify-self: end; width: min(78%, 250px); margin-right: 4%; }
+    .story__beat--right .story__num { left: auto; right: 0; transform-origin: right top; }
+    .story__phone { justify-self: end; width: min(62%, 250px); margin-right: 3%; }
+    .story__beat--right .story__phone { justify-self: start; margin-right: 0; margin-left: 3%; }
   }
   @media (min-width: 900px) {
     .story__head { margin-bottom: var(--space-6, 64px); }
