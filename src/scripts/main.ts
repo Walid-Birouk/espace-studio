@@ -331,3 +331,19 @@ if (!reduce.matches) {
   if (document.readyState === 'complete') requestAnimationFrame(start);
   else addEventListener('load', () => requestAnimationFrame(start), { once: true });
 }
+
+// ---- Curtain between pages: cover, then go; the next page opens it (see Base.astro head) ----
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.addEventListener('click', (e) => {
+    const a = (e.target as Element).closest?.('a');
+    if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.target && a.target !== '_self' || a.hasAttribute('download')) return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || url.pathname === location.pathname || !/^https?:$/.test(url.protocol)) return;
+    e.preventDefault();
+    try { sessionStorage.setItem('cur-nav', String(Date.now())); } catch { /* private mode */ }
+    document.documentElement.classList.remove('cur-intro', 'cur-arrive');
+    document.documentElement.classList.add('cur-leave');
+    setTimeout(() => { location.href = url.href; }, 430);
+  });
+}

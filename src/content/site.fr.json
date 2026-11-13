@@ -1,8 +1,8 @@
 {
   "lang": "fr",
   "meta": {
-    "title": "esPAce, sites, Google et ventes en ligne pour les commerces",
-    "description": "Site vitrine, référencement Google, publicités, boutique Shopify et données réunies pour les commerces. Basé à Paris, clients partout."
+    "title": "esPAce, votre commerce en ligne, à votre image",
+    "description": "Site à votre image, visibilité sur Google et dans les IA, carte fidélité et avis clients depuis un seul sticker, boutique en ligne. Basé à Paris, clients partout."
   },
   "nav": {
     "work": "Projets",
@@ -20,12 +20,12 @@
     "langLabel": "Langue"
   },
   "hero": {
-    "title": "Plus de clients, en ligne et en boutique.",
+    "title": "Votre commerce en ligne, à votre image.",
     "wants": [
-      "Être trouvé quand on cherche près de chez vous, sur internet comme dans les IA.",
-      "Plus de monde qui pousse la porte.",
-      "Des ventes même quand la boutique est fermée.",
-      "Savoir ce qui marche, en un coup d’œil."
+      "Un site qui ressemble à votre boutique.",
+      "On vous trouve sur Google, sur Maps et dans les IA.",
+      "Un sticker en caisse : le client approche son téléphone, il a sa carte fidélité ou vous laisse un avis.",
+      "Et le reste quand il vous sert : boutique en ligne, réservations, réponses WhatsApp, vos chiffres réunis."
     ],
     "line": "Basé à Paris, pour les commerces d’ici et d’ailleurs.",
     "cta": "Prendre rendez-vous",
@@ -46,7 +46,7 @@
         "price": "dès 149 € / mois"
       },
       {
-        "name": "Carte fidélité",
+        "name": "Sticker fidélité + avis",
         "price": "19 € / mois"
       }
     ]
@@ -171,9 +171,9 @@
       },
       {
         "name": "Sur mesure",
-        "price": "2 900 €",
-        "body": "IA, données réunies, applications, cloud ou serveur à vous.",
-        "time": "4 semaines et plus"
+        "body": "IA, données réunies, applications, cloud ou serveur à vous. On en parle, je chiffre.",
+        "time": "4 semaines et plus",
+        "open": "Sur devis"
       }
     ],
     "quote": "Vous envoyez photos et idées, je construis. Acompte seulement quand la première maquette vous plaît. Nom de domaine facturé à part. TVA non applicable, art. 293 B du CGI.",
@@ -191,8 +191,12 @@
         "body": "Google, Instagram, ChatGPT : je crée et je règle vos annonces. Budget pub en plus."
       },
       {
-        "title": "Carte fidélité dans le téléphone : 99 € puis 19 € par mois",
-        "body": "Vos clients touchent un sticker en caisse : un tampon, sans appli ni carte papier. La carte vit dans Google Wallet et se remplit toute seule. Apple Wallet bientôt."
+        "title": "Sticker fidélité + avis : 99 € puis 19 € par mois",
+        "body": "Un sticker à poser où vous voulez : caisse, vitrine, table, sac. Le client approche son téléphone : un tampon sur sa carte fidélité, ou votre page d’avis Google ouverte. Sans appli ni carte papier. La carte vit dans Google Wallet. Apple Wallet bientôt."
+      },
+      {
+        "title": "Tout ensemble : 98 € par mois, 0 € à la commande",
+        "body": "Le site en abonnement, la fiche Google et le sticker fidélité + avis. Engagement 12 mois."
       }
     ]
   },

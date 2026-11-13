@@ -1,8 +1,8 @@
 {
   "lang": "en",
   "meta": {
-    "title": "esPAce, websites, Google and online sales for small businesses",
-    "description": "Shop websites, Google visibility, ads, Shopify stores and all your numbers in one place. Based in Paris, working worldwide."
+    "title": "esPAce, your shop online, in your own image",
+    "description": "A website in your own image, visibility on Google and in AI assistants, loyalty card and customer reviews from one sticker, online store. Based in Paris, working worldwide."
   },
   "nav": {
     "work": "Work",
@@ -20,12 +20,12 @@
     "langLabel": "Language"
   },
   "hero": {
-    "title": "More customers, online and in store.",
+    "title": "Your shop online, in your own image.",
     "wants": [
-      "Be found when people search near you, online and in AI assistants.",
-      "More people walking through the door.",
-      "Sales even when the shop is closed.",
-      "Know what works, at a glance."
+      "A website that looks like your shop.",
+      "People find you on Google, on Maps and in AI assistants.",
+      "One sticker at the till: the customer taps their phone and gets a loyalty card or leaves you a review.",
+      "And the rest when it helps: online store, bookings, WhatsApp replies, all your numbers in one place."
     ],
     "line": "Based in Paris, for shops here and anywhere.",
     "cta": "Book a free call",
@@ -46,7 +46,7 @@
         "price": "from €149 / mo"
       },
       {
-        "name": "Loyalty card",
+        "name": "Loyalty + review sticker",
         "price": "€19 / mo"
       }
     ]
@@ -171,9 +171,9 @@
       },
       {
         "name": "Custom",
-        "price": "€2,900",
-        "body": "AI, unified data, apps, cloud or your own server.",
-        "time": "4+ weeks"
+        "body": "AI, unified data, apps, cloud or your own server. We talk, I quote.",
+        "time": "4+ weeks",
+        "open": "On quote"
       }
     ],
     "quote": "You send photos and ideas, I build. Deposit only once you like the first draft. Domain name billed separately. VAT not applicable (French micro-business).",
@@ -191,8 +191,12 @@
         "body": "Google, Instagram, ChatGPT: I create and tune your ads. Ad budget extra."
       },
       {
-        "title": "Loyalty card on the phone: €99, then €19 a month",
-        "body": "Customers tap a sticker at the till: one stamp, no app, no paper card. The card lives in Google Wallet and fills itself. Apple Wallet coming soon."
+        "title": "Loyalty + review sticker: €99, then €19 a month",
+        "body": "One sticker you can put anywhere: till, window, table, bag. The customer taps their phone: a stamp on their loyalty card, or your Google review page opens. No app, no paper card. The card lives in Google Wallet. Apple Wallet coming soon."
+      },
+      {
+        "title": "All together: €98 a month, €0 upfront",
+        "body": "The website subscription, the Google listing and the loyalty + review sticker. 12-month minimum."
       }
     ]
   },

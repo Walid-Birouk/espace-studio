@@ -28,7 +28,7 @@ test('French typography: no plain space before « : ? ! »', async ({ page }) =>
 
 test('hero says who, what and how to contact in the first screen', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('h1')).toContainText('boutique');
+  await expect(page.locator('h1')).toContainText('commerce');
   await expect(page.getByRole('link', { name: 'Prendre rendez-vous' }).first()).toBeInViewport();
   await expect(page.locator('.wall__intro').getByRole('link', { name: 'WhatsApp' })).toHaveAttribute('href', /wa\.me\/33759583230/);
 });

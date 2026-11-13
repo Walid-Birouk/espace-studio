@@ -538,3 +538,22 @@ button { font: inherit; color: inherit; }
   will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) { .wall__board, .piece { transform: none; will-change: auto; } }
+
+/* ---------- Curtain: intro once per visit, short cover between pages (after myrak.ch). Classes set in Base.astro head. ---------- */
+.curtain { display: none; position: fixed; inset: 0; z-index: 1000; place-items: center; background: var(--enamel); color: #F5F3EE; clip-path: circle(150vmax at 50% 50%); }
+.cur-intro .curtain, .cur-arrive .curtain, .cur-leave .curtain { display: grid; }
+.curtain__word { display: flex; align-items: baseline; font-family: var(--font-display); font-weight: 800; font-stretch: 70%; font-size: clamp(56px, 11vw, 132px); line-height: 1; letter-spacing: -0.01em; }
+.curtain__word i { font-style: normal; }
+.curtain__word u { width: .17em; height: .17em; margin-left: .05em; border-radius: 50%; background: #E8C478; text-decoration: none; }
+.cur-intro .curtain { animation: cur-out .7s var(--ease-draw) 1.25s both; }
+.cur-intro .curtain__word i { animation: cur-letter .5s var(--ease-story) calc(120ms + var(--k) * 75ms) both; }
+.cur-intro .curtain__word u { animation: cur-pop .45s cubic-bezier(.34, 1.56, .64, 1) .72s both; }
+.cur-arrive .curtain { animation: cur-out .6s var(--ease-draw) .2s both; }
+.cur-leave .curtain { animation: cur-in .42s var(--ease-draw) both; }
+.cur-leave .curtain__word { animation: cur-fade .3s ease .12s both; }
+@keyframes cur-letter { from { opacity: 0; translate: 0 .35em; } to { opacity: 1; translate: 0 0; } }
+@keyframes cur-pop { from { scale: 0; } to { scale: 1; } }
+@keyframes cur-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes cur-out { from { clip-path: circle(150vmax at 50% 50%); } to { clip-path: circle(0 at 100% 50%); visibility: hidden; } }
+@keyframes cur-in { from { clip-path: circle(0 at 0% 50%); } to { clip-path: circle(150vmax at 50% 50%); } }
+@media (prefers-reduced-motion: reduce) { .curtain { display: none !important; } }

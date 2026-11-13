@@ -44,7 +44,7 @@ const business = {
     '@type': 'Offer',
     name: p.name,
     description: p.body,
-    priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'EUR', minPrice: Number(p.price.replace(/[^\d]/g, '')) },
+    ...('price' in p ? { priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'EUR', minPrice: Number(p.price.replace(/[^\d]/g, '')) } } : {}),
   })),
 };
 const ld = [business, ...jsonld];
@@ -77,11 +77,26 @@ const ld = [business, ...jsonld];
       (function (h) {
         h.classList.replace('no-js', 'js');
         try { var t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') h.dataset.theme = t; } catch (e) {}
+        // Curtain: a written-out intro once per visit, a short one when arriving from another page of the site.
+        try {
+          if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var nav = Number(sessionStorage.getItem('cur-nav')); sessionStorage.removeItem('cur-nav');
+            var c = nav && Date.now() - nav < 6000 ? 'cur-arrive' : !sessionStorage.getItem('cur-intro') && !location.hash ? 'cur-intro' : '';
+            if (c) {
+              sessionStorage.setItem('cur-intro', '1');
+              h.classList.add(c);
+              var off = function () { h.classList.remove('cur-intro', 'cur-arrive', 'cur-leave'); };
+              setTimeout(off, c === 'cur-intro' ? 2100 : 950);
+              addEventListener('pageshow', function (e) { if (e.persisted) off(); });
+            }
+          }
+        } catch (e) {}
       })(document.documentElement);
     </script>
     {ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
   </head>
   <body class={bodyClass}>
+    <div class="curtain" aria-hidden="true"><b class="curtain__word">{[...'esPAce'].map((ch, i) => <i style={`--k:${i}`}>{ch}</i>)}<u></u></b></div>
     <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
     <span id="top" tabindex="-1"></span>
     <a class="skip" href="#contact">{s.nav.skip}</a>

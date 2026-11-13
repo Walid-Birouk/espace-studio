@@ -18,7 +18,7 @@ const formKey = (import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined) || 
       {s.packages.items.map((it) => (
         <li>
           <span class="prices__name">{it.name}</span>
-          <span class="prices__amount"><small>{s.packages.from}</small> {typo(it.price, lang)}</span>
+          <span class="prices__amount">{'open' in it ? typo(it.open, lang) : <><small>{s.packages.from}</small> {typo(it.price, lang)}</>}</span>
           <span class="prices__body">{typo(it.body, lang)}</span>
           <span class="prices__time caption">{typo(it.time, lang)}</span>
         </li>
