@@ -366,7 +366,7 @@ button { font: inherit; color: inherit; }
 .wall__dots i { display: block; height: 3px; border-radius: 2px; background: var(--zinc); overflow: hidden; }
 .wall__dots b { display: block; height: 100%; width: 0; background: var(--enamel); }
 .wall__dots li[data-done] b { width: 100%; background: color-mix(in srgb, var(--enamel) 45%, var(--zinc)); }
-.wall__dots li[data-on] b { width: 100%; transform-origin: 0 50%; transform: scaleX(1); }
+.wall__dots li[data-on] b { width: 100%; transform-origin: 0 50%; transform: scaleX(0); }
 @media (max-width: 599px) { .wall__dots button span { display: none; } }
 .wall__viewport { scroll-padding-left: 24px; }
 @media (min-width: 900px) {

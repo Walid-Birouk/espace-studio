@@ -111,13 +111,15 @@ if (wallVp && wallCtrl) {
     });
   };
   const maxLeft = () => wallVp.scrollWidth - wallVp.clientWidth;
-  // The active dot fills as the drift moves through that project.
+  // Which project the eye is on: the one whose title has passed a point a third into the viewport, so the signal
+  // follows the pieces on screen, not the strip's left edge. Its bar fills from that point to the next title.
+  const REF = () => wallVp.clientWidth * 0.33;
+  const current = () => { const x = wallVp.scrollLeft + REF(); let k = 0; titles.forEach((_, j) => { if (left(j) <= x) k = j; }); return k; };
   const progress = () => {
-    const x = wallVp.scrollLeft;
-    let k = 0;
-    titles.forEach((_, j) => { if (left(j) <= x + 40) k = j; });
+    const x = wallVp.scrollLeft + REF();
+    const k = current();
     if (k !== idx) mark(k);
-    const end = k + 1 < titles.length ? left(k + 1) : maxLeft();
+    const end = k + 1 < titles.length ? left(k + 1) : maxLeft() + REF();
     const f = Math.min(1, Math.max(0, (x - left(k)) / Math.max(1, end - left(k))));
     dots[k].querySelector('b')!.style.transform = `scaleX(${f})`;
   };
@@ -133,7 +135,6 @@ if (wallVp && wallCtrl) {
     resumeAt = Math.max(resumeAt, Date.now() + 1200);
     wallVp.classList.remove('is-drifting');
     wallVp.scrollTo({ left: left(n), behavior: smooth ? 'smooth' : 'auto' });
-    mark(n);
     restart();
   };
   const tick = (t: number) => {
@@ -167,16 +168,11 @@ if (wallVp && wallCtrl) {
       if (!userPaused && Date.now() < resumeAt) timer = window.setTimeout(restart, resumeAt - Date.now());
     }
   };
-  // Swiping or scrolling by hand: follow along, and wait a moment before sliding again.
-  let scrollT = 0;
+  // Any scroll (swipe, wheel, drag, dots) moves the signal at once; a changed project also resyncs the drift.
+  let scrollRaf = 0;
   wallVp.addEventListener('scroll', () => {
-    clearTimeout(scrollT);
-    scrollT = window.setTimeout(() => {
-      const x = wallVp.scrollLeft + 40;
-      let k = 0;
-      titles.forEach((_, j) => { if (left(j) <= x) k = j; });
-      if (k !== idx) { mark(k); restart(); }
-    }, 120);
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(() => { scrollRaf = 0; const was = idx; progress(); if (idx !== was && !raf) restart(); });
   }, { passive: true });
   const nudge = () => { resumeAt = Date.now() + 8000; restart(); };
   wallVp.addEventListener('touchstart', nudge, { passive: true });
@@ -234,7 +230,7 @@ if (wallVp && wallCtrl) {
   wallVp.addEventListener('dragstart', (e) => e.preventDefault());
   wallVp.addEventListener('wheel', stopGlide, { passive: true });
 
-  mark(0);
+  mark(0); progress();
   restart();
 
   // ---- Depth: each piece moves at its own speed as the wall drifts (no mouse lean: it moved cards away from the cursor) ----
