@@ -33,15 +33,28 @@
     "hint": "Projets récents",
     "offersLabel": "Offres et prix",
     "offers": [
-      { "name": "Site vitrine", "price": "dès 690 €" },
-      { "name": "Site en abonnement", "price": "79 € / mois" },
-      { "name": "Google et publicités", "price": "dès 149 € / mois" },
-      { "name": "Carte fidélité", "price": "19 € / mois" }
+      {
+        "name": "Site vitrine",
+        "price": "dès 690 €"
+      },
+      {
+        "name": "Site en abonnement",
+        "price": "79 € / mois"
+      },
+      {
+        "name": "Google et publicités",
+        "price": "dès 149 € / mois"
+      },
+      {
+        "name": "Carte fidélité",
+        "price": "19 € / mois"
+      }
     ]
   },
   "story": {
     "title": "Comment un client vous trouve.",
     "intro": "",
+    "cue": "Suivre le parcours",
     "doLabel": "Mon travail",
     "example": "Exemple",
     "real": "Site en ligne",

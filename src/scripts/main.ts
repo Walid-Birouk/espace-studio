@@ -59,7 +59,7 @@ for (const seq of $$('[data-seq]')) {
 // ---- Fade-ins: blocks rise into place as they enter the screen (skipped with reduced motion) ----
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
   const sel = [
-    '.wall__intro > *', '.story__head > *', '.story__beat > *', '.story__end > *',
+    '.wall__intro > *', '.story__head > *', '.story__copy', '.story__end > *',
     '.case__head > *', '.seq__steps', '.seq__nav', '.prices__title', '.prices__list > li', '.prices__quote',
     '.about > *', '.contact__inner > :not(form)',
   ].join(',');

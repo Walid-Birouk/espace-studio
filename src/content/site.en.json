@@ -33,15 +33,28 @@
     "hint": "Recent work",
     "offersLabel": "Offers and prices",
     "offers": [
-      { "name": "Showcase website", "price": "from €690" },
-      { "name": "Website subscription", "price": "€79 / mo" },
-      { "name": "Google and ads", "price": "from €149 / mo" },
-      { "name": "Loyalty card", "price": "€19 / mo" }
+      {
+        "name": "Showcase website",
+        "price": "from €690"
+      },
+      {
+        "name": "Website subscription",
+        "price": "€79 / mo"
+      },
+      {
+        "name": "Google and ads",
+        "price": "from €149 / mo"
+      },
+      {
+        "name": "Loyalty card",
+        "price": "€19 / mo"
+      }
     ]
   },
   "story": {
     "title": "How a customer finds you.",
     "intro": "",
+    "cue": "Follow the path",
     "doLabel": "My part",
     "example": "Example",
     "real": "Live site",
