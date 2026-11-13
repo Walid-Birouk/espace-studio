@@ -18,7 +18,7 @@ const STRIDE = 206; // width of one project cluster
 const boardW = 6 + projects.length * STRIDE + 6;
 
 // Slight, fixed tilts so the board looks pinned by hand.
-const tilt = [-1.2, 0.8, -0.6, 1.4, -1.6, 0.5, 1.1];
+const tilt = [-0.4, 0.5, -0.3, 0.6, -0.5, 0.3, 0.4];
 ---
 <section class="wall" id="travaux" aria-labelledby="wall-title" data-wall>
   <div class="wall__intro wrap" data-wall-intro>
@@ -50,12 +50,11 @@ const tilt = [-1.2, 0.8, -0.6, 1.4, -1.6, 0.5, 1.1];
         return (
           <article class="cluster" aria-labelledby={`wall-${proj.id}`}>
             <a class="cluster__title" href={href} style={`--x:${ox};--y:3`}>
-              <span class="tag">{p.kind === 'concept' ? s.wall.concept : 'Client'}</span>
               <h2 id={`wall-${proj.id}`}>{p.name}</h2>
               <span class="caption">{tr(p.sector, lang)}{tr(p.place, lang) && `, ${tr(p.place, lang).split(',')[0]}`}</span>
             </a>
 
-            <a class="piece" href={href} tabindex="-1" aria-hidden="true" style={at(0, 17, 92, tilt[(k + 0) % 7], 0.2)} data-piece>
+            <a class="piece" href={href} tabindex="-1" aria-hidden="true" style={at(0, 17, 92, 0, 0.5)} data-piece>
               <span class="piece__frame piece__frame--browser">
                 <span class="piece__bar"><i></i><i></i><i></i></span>
                 <Image src={p.shotDesktop} alt="" widths={[480, 820, 1200]} sizes="(min-width: 900px) 62vh, 70vw" loading={k === 0 ? 'eager' : 'lazy'} />
