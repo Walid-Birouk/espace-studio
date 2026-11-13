@@ -22,10 +22,10 @@
   "hero": {
     "title": "Your shop online, in your own image.",
     "wants": [
-      "A website that looks like your shop.",
-      "People find you on Google, on Maps and in AI assistants.",
-      "One sticker at the till: the customer taps their phone and gets a loyalty card or leaves you a review.",
-      "And the rest when it helps: online store, bookings, WhatsApp replies, all your numbers in one place."
+      "A website that makes people want to walk in.",
+      "People find you when they search nearby: Google, Maps, ChatGPT.",
+      "One sticker at the till: a customer taps their phone and leaves with a loyalty card, or leaves you a review.",
+      "And when you need it: online sales, bookings, WhatsApp, all your numbers in one place."
     ],
     "line": "Based in Paris, for shops here and anywhere.",
     "cta": "Book a free call",
@@ -34,19 +34,19 @@
     "offersLabel": "Offers and prices",
     "offers": [
       {
-        "name": "Showcase website",
+        "name": "Your website, paid once",
         "price": "from €690"
       },
       {
-        "name": "Website subscription",
+        "name": "Your website, monthly",
         "price": "€79 / mo"
       },
       {
-        "name": "Google and ads",
+        "name": "Google and managed ads",
         "price": "from €149 / mo"
       },
       {
-        "name": "Loyalty + review sticker",
+        "name": "Loyalty and review sticker",
         "price": "€19 / mo"
       }
     ]

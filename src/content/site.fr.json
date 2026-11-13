@@ -22,10 +22,10 @@
   "hero": {
     "title": "Votre commerce en ligne, à votre image.",
     "wants": [
-      "Un site qui ressemble à votre boutique.",
-      "On vous trouve sur Google, sur Maps et dans les IA.",
-      "Un sticker en caisse : le client approche son téléphone, il a sa carte fidélité ou vous laisse un avis.",
-      "Et le reste quand il vous sert : boutique en ligne, réservations, réponses WhatsApp, vos chiffres réunis."
+      "Un site qui donne envie de pousser votre porte.",
+      "On vous trouve quand on cherche près de chez vous : Google, Maps, ChatGPT.",
+      "Un sticker en caisse : le client y pose son téléphone et repart avec sa carte de fidélité, ou vous laisse un avis.",
+      "Et quand vous en avez besoin : vente en ligne, réservations, WhatsApp, vos chiffres au même endroit."
     ],
     "line": "Basé à Paris, pour les commerces d’ici et d’ailleurs.",
     "cta": "Prendre rendez-vous",
@@ -34,19 +34,19 @@
     "offersLabel": "Offres et prix",
     "offers": [
       {
-        "name": "Site vitrine",
+        "name": "Votre site, payé une fois",
         "price": "dès 690 €"
       },
       {
-        "name": "Site en abonnement",
+        "name": "Votre site, au mois",
         "price": "79 € / mois"
       },
       {
-        "name": "Google et publicités",
+        "name": "Google et pubs gérées",
         "price": "dès 149 € / mois"
       },
       {
-        "name": "Sticker fidélité + avis",
+        "name": "Sticker fidélité et avis",
         "price": "19 € / mois"
       }
     ]

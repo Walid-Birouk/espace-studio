@@ -77,16 +77,18 @@ const ld = [business, ...jsonld];
       (function (h) {
         h.classList.replace('no-js', 'js');
         try { var t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') h.dataset.theme = t; } catch (e) {}
-        // Curtain: a written-out intro once per visit, a short one when arriving from another page of the site.
+        // Curtain: the intro plays on every fresh load and every refresh; a short one when arriving from another page of the site.
         try {
           if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
             var nav = Number(sessionStorage.getItem('cur-nav')); sessionStorage.removeItem('cur-nav');
-            var c = nav && Date.now() - nav < 6000 ? 'cur-arrive' : !sessionStorage.getItem('cur-intro') && !location.hash ? 'cur-intro' : '';
+            var n = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+            var reload = n && n.type === 'reload', back = n && n.type === 'back_forward';
+            // A deep link (#offres from a QR code) goes straight to its section; a refresh always replays.
+            var c = nav && Date.now() - nav < 6000 ? 'cur-arrive' : reload || (!back && !location.hash) ? 'cur-intro' : '';
             if (c) {
-              sessionStorage.setItem('cur-intro', '1');
               h.classList.add(c);
               var off = function () { h.classList.remove('cur-intro', 'cur-arrive', 'cur-leave'); };
-              setTimeout(off, c === 'cur-intro' ? 2100 : 950);
+              setTimeout(off, c === 'cur-intro' ? 2600 : 950);
               addEventListener('pageshow', function (e) { if (e.persisted) off(); });
             }
           }
@@ -96,7 +98,19 @@ const ld = [business, ...jsonld];
     {ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
   </head>
   <body class={bodyClass}>
-    <div class="curtain" aria-hidden="true"><b class="curtain__word">{[...'esPAce'].map((ch, i) => <i style={`--k:${i}`}>{ch}</i>)}<u></u></b></div>
+    <div class="curtain" aria-hidden="true">
+      <div class="curtain__set">
+        <b class="curtain__word">{[...'esPAce'].map((ch, i) => <i style={`--k:${i}`}>{ch}</i>)}<u></u></b>
+        <div class="curtain__bits">
+          <i class="bit bit--sw" style="--k:0;--sx:-38vw;--sy:-34vh;--sr:-16deg;--c:#E8C478"></i>
+          <i class="bit bit--sw" style="--k:1;--sx:30vw;--sy:-38vh;--sr:11deg;--c:#F5F3EE"></i>
+          <i class="bit bit--sw" style="--k:2;--sx:-44vw;--sy:22vh;--sr:8deg;--c:#9FB2E0"></i>
+          <i class="bit bit--type" style="--k:3;--sx:40vw;--sy:26vh;--sr:-9deg"></i>
+          <i class="bit bit--wire" style="--k:4;--sx:-12vw;--sy:-44vh;--sr:14deg"></i>
+          <i class="bit bit--phone" style="--k:5;--sx:16vw;--sy:40vh;--sr:-20deg"></i>
+        </div>
+      </div>
+    </div>
     <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
     <span id="top" tabindex="-1"></span>
     <a class="skip" href="#contact">{s.nav.skip}</a>

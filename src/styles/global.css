@@ -539,21 +539,53 @@ button { font: inherit; color: inherit; }
 }
 @media (prefers-reduced-motion: reduce) { .wall__board, .piece { transform: none; will-change: auto; } }
 
-/* ---------- Curtain: intro once per visit, short cover between pages (after myrak.ch). Classes set in Base.astro head. ---------- */
-.curtain { display: none; position: fixed; inset: 0; z-index: 1000; place-items: center; background: var(--enamel); color: #F5F3EE; clip-path: circle(150vmax at 50% 50%); }
+/* ---------- Curtain: the studio's story in two seconds. Loose mood-board pieces (swatches, a type card, a wireframe, a phone)
+   drift in, then line up under the name; the ochre dot lands; the green opens on the page. Plays on every load and refresh,
+   short cover between pages (after myrak.ch). Classes set in Base.astro head. Always deep green, in both themes. ---------- */
+.curtain { display: none; position: fixed; inset: 0; z-index: 1000; place-items: center; overflow: hidden; background: #1E5B4A; color: #F5F3EE; clip-path: circle(150vmax at 50% 50%); }
 .cur-intro .curtain, .cur-arrive .curtain, .cur-leave .curtain { display: grid; }
-.curtain__word { display: flex; align-items: baseline; font-family: var(--font-display); font-weight: 800; font-stretch: 70%; font-size: clamp(56px, 11vw, 132px); line-height: 1; letter-spacing: -0.01em; }
+.curtain::before, .curtain::after { content: ""; position: absolute; width: 90vmax; aspect-ratio: 1; border-radius: 50%; pointer-events: none; }
+.curtain::before { left: -35vmax; top: -45vmax; background: radial-gradient(closest-side, rgba(134, 201, 174, .34), transparent); }
+.curtain::after { right: -40vmax; bottom: -50vmax; background: radial-gradient(closest-side, rgba(232, 196, 120, .22), transparent); }
+.curtain__set { position: relative; z-index: 1; display: grid; justify-items: center; gap: .16em; font-size: clamp(60px, 11vw, 132px); }
+.curtain__word { display: flex; align-items: baseline; font-family: var(--font-display); font-weight: 800; font-stretch: 70%; line-height: 1; letter-spacing: -0.01em; }
 .curtain__word i { font-style: normal; }
 .curtain__word u { width: .17em; height: .17em; margin-left: .05em; border-radius: 50%; background: #E8C478; text-decoration: none; }
-.cur-intro .curtain { animation: cur-out .7s var(--ease-draw) 1.25s both; }
+.curtain__bits { display: flex; align-items: center; gap: .07em; }
+.bit { display: block; flex: none; width: .36em; height: .36em; background: var(--c, #F5F3EE); box-shadow: 0 .03em .09em rgba(8, 30, 23, .35); }
+.bit--type { width: .5em; display: grid; place-items: center; }
+.bit--type::before { content: "Aa"; font-family: var(--font-display); font-style: normal; font-weight: 800; font-stretch: 70%; font-size: .26em; line-height: 1; color: #1E5B4A; }
+.bit--wire { width: .5em; background:
+  linear-gradient(#F5F3EE, #F5F3EE) .06em .06em / .38em .1em no-repeat,
+  linear-gradient(#F5F3EE, #F5F3EE) .06em .2em / .17em .1em no-repeat,
+  linear-gradient(#F5F3EE, #F5F3EE) .27em .2em / .17em .1em no-repeat,
+  rgba(245, 243, 238, .16); box-shadow: inset 0 0 0 1.5px rgba(245, 243, 238, .85); }
+.bit--phone { width: .21em; border-radius: .05em; background:
+  linear-gradient(#E8C478, #E8C478) .04em .05em / .13em .11em no-repeat,
+  linear-gradient(#F5F3EE, #F5F3EE) .04em .2em / .13em .03em no-repeat,
+  linear-gradient(#F5F3EE, #F5F3EE) .04em .26em / .08em .03em no-repeat,
+  #17473A; box-shadow: inset 0 0 0 1.5px #F5F3EE, 0 .03em .09em rgba(8, 30, 23, .35); }
+.cur-intro .curtain { animation: cur-out .7s var(--ease-draw) 1.8s both; }
+.cur-intro .curtain::before { animation: cur-glow-a 2.6s ease-in-out both; }
+.cur-intro .curtain::after { animation: cur-glow-b 2.6s ease-in-out both; }
 .cur-intro .curtain__word i { animation: cur-letter .5s var(--ease-story) calc(120ms + var(--k) * 75ms) both; }
-.cur-intro .curtain__word u { animation: cur-pop .45s cubic-bezier(.34, 1.56, .64, 1) .72s both; }
+.cur-intro .bit { animation: cur-bit 1.3s linear calc(40ms + var(--k) * 55ms) both; }
+.cur-intro .curtain__word u { animation: cur-pop .45s cubic-bezier(.34, 1.56, .64, 1) 1.4s both; }
 .cur-arrive .curtain { animation: cur-out .6s var(--ease-draw) .2s both; }
 .cur-leave .curtain { animation: cur-in .42s var(--ease-draw) both; }
-.cur-leave .curtain__word { animation: cur-fade .3s ease .12s both; }
+.cur-leave .curtain__set { animation: cur-fade .3s ease .12s both; }
 @keyframes cur-letter { from { opacity: 0; translate: 0 .35em; } to { opacity: 1; translate: 0 0; } }
 @keyframes cur-pop { from { scale: 0; } to { scale: 1; } }
 @keyframes cur-fade { from { opacity: 0; } to { opacity: 1; } }
+/* Loose and close to the eye first, drifting; then each piece drops into its place in the row. */
+@keyframes cur-bit {
+  0% { opacity: 0; transform: translate(calc(var(--sx) * 1.15), calc(var(--sy) * 1.15)) rotate(calc(var(--sr) * 1.6)) scale(2.4); animation-timing-function: cubic-bezier(.2, .7, .3, 1); }
+  14% { opacity: 1; }
+  46% { opacity: 1; transform: translate(var(--sx), var(--sy)) rotate(var(--sr)) scale(2.2); animation-timing-function: cubic-bezier(.65, 0, .2, 1); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes cur-glow-a { from { transform: translate(-6vw, -4vh) scale(.9); } to { transform: translate(34vw, 30vh) scale(1.15); } }
+@keyframes cur-glow-b { from { transform: translate(6vw, 4vh) scale(1.1); } to { transform: translate(-30vw, -26vh) scale(.9); } }
 @keyframes cur-out { from { clip-path: circle(150vmax at 50% 50%); } to { clip-path: circle(0 at 100% 50%); visibility: hidden; } }
 @keyframes cur-in { from { clip-path: circle(0 at 0% 50%); } to { clip-path: circle(150vmax at 50% 50%); } }
 @media (prefers-reduced-motion: reduce) { .curtain { display: none !important; } }
