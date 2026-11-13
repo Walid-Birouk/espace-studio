@@ -524,20 +524,10 @@ button { font: inherit; color: inherit; }
 @media (pointer: coarse) { .wall__viewport { scroll-snap-type: x proximity; } }
 
 /* ---- Depth ---- */
-/* --d (0.2 far … 0.9 near) is set per piece in Wall.astro. Near pieces run a little ahead of the drift, far ones lag,
-   and every piece leans away from the mouse by its depth. The board itself tilts a few degrees toward the cursor. */
-.wall__board {
-  transform: perspective(1600px) rotateY(calc(var(--mx, 0) * 6deg)) rotateX(calc(var(--my, 0) * -3.5deg));
-  transform-origin: calc(var(--sx, 0) * 1px + 50cqw) 50%;
-  will-change: transform;
-}
-.piece {
-  transform: translate3d(
-    calc(var(--sx, 0) * (0.5 - var(--d)) * 0.16px + var(--mx, 0) * var(--d) * -40px),
-    calc(var(--my, 0) * var(--d) * -26px), 0);
-  will-change: transform;
-}
-@media (prefers-reduced-motion: reduce) { .wall__board, .piece { transform: none; will-change: auto; } }
+/* --d (0.2 far … 0.9 near) is set per piece in Wall.astro. Near pieces run a little ahead of the drift, far ones lag.
+   The mouse lean (board rotating, pieces sliding away from the cursor) was dropped: it made cards hard to click. */
+.piece { transform: translate3d(calc(var(--sx, 0) * (0.5 - var(--d)) * 0.16px), 0, 0); will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .piece { transform: none; will-change: auto; } }
 
 /* ---------- Curtain: the studio's story in two seconds. Loose mood-board pieces (swatches, a type card, a wireframe, a phone)
    drift in, then line up under the name; the ochre dot lands; the green opens on the page. Plays on every load and refresh,

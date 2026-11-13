@@ -204,7 +204,7 @@ if (wallVp && wallCtrl) {
   addEventListener('pointermove', (e) => {
     if (!down) return;
     const dx = e.clientX - startX;
-    if (!moved && Math.abs(dx) > 4) { moved = true; wallVp.classList.add('is-dragging'); }
+    if (!moved && Math.abs(dx) > 8) { moved = true; wallVp.classList.add('is-dragging'); }
     if (!moved) return;
     e.preventDefault();
     wallVp.scrollLeft = startLeft - dx;
@@ -217,6 +217,8 @@ if (wallVp && wallCtrl) {
     down = false;
     wallVp.classList.remove('is-grab');
     if (!moved) return;
+    // Swallow only the click that ends this drag; a release outside the strip must not eat the next click.
+    setTimeout(() => { moved = false; }, 0);
     resumeAt = Date.now() + 8000;
     let v = performance.now() - lastT > 80 ? 0 : vel * 16; // px per frame
     const step = () => {
@@ -235,22 +237,8 @@ if (wallVp && wallCtrl) {
   mark(0);
   restart();
 
-  // ---- Depth: each piece moves at its own speed as the wall drifts, and the wall leans toward the mouse ----
+  // ---- Depth: each piece moves at its own speed as the wall drifts (no mouse lean: it moved cards away from the cursor) ----
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const wall = wallVp.closest<HTMLElement>('[data-wall]') ?? wallVp;
-    let tx = 0, ty = 0, mx = 0, my = 0, lean = 0;
-    const settle = () => {
-      mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
-      board.style.setProperty('--mx', mx.toFixed(3)); board.style.setProperty('--my', my.toFixed(3));
-      lean = Math.abs(tx - mx) > 0.002 || Math.abs(ty - my) > 0.002 ? requestAnimationFrame(settle) : 0;
-    };
-    const aim = (x: number, y: number) => { tx = x; ty = y; if (!lean) lean = requestAnimationFrame(settle); };
-    wall.addEventListener('pointermove', (e) => {
-      if (e.pointerType !== 'mouse') return;
-      const r = wallVp.getBoundingClientRect();
-      aim(((e.clientX - r.left) / r.width - 0.5) * 2, ((e.clientY - r.top) / r.height - 0.5) * 2);
-    });
-    wall.addEventListener('pointerleave', () => aim(0, 0));
     const track = () => board.style.setProperty('--sx', String(Math.round(wallVp.scrollLeft)));
     wallVp.addEventListener('scroll', track, { passive: true });
     track();

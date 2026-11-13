@@ -64,13 +64,11 @@ const values = lang === 'fr' ? ['1 840 €', '612', '27', '5'] : ['€1,840', '6
       <p class="scr__fake">{sc.fake}</p>
     </div>
   )}
-  <span class="scr__tag">{['site', 'shop'].includes(id) ? s.real : s.example}</span>
 </div>
 
 <style>
   .scr { position: relative; height: 100%; background: #F6F7F5; color: #1F2328; font: 13px/1.4 Arial, Helvetica, sans-serif; overflow: hidden; }
   .scr__pad { padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; height: 100%; }
-  .scr__tag { position: absolute; left: 50%; bottom: 10px; translate: -50% 0; padding: 3px 9px; border-radius: 999px; background: rgba(31,35,40,.78); color: #fff; font-size: 11px; white-space: nowrap; }
 
   .scr__bar { margin: 0; padding: 9px 14px; background: #fff; border-radius: 999px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
   .scr__map { position: relative; height: 34%; border-radius: 10px; background:
