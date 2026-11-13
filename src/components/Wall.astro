@@ -31,6 +31,11 @@ const tilt = [-1.2, 0.8, -0.6, 1.4, -1.6, 0.5, 1.1];
       <a class="btn" href={booking} target={CONTACT.booking ? '_blank' : undefined} rel="noopener">{s.hero.cta}</a>
       <a class="link link--wa" href={CONTACT.whatsapp} rel="noopener"><WaIcon />{s.hero.whatsapp}</a>
     </div>
+    <ul class="wall__offers" aria-label={s.hero.offersLabel}>
+      {s.hero.offers.map((o) => (
+        <li><a href="#offres"><span class="caption">{typo(o.name, lang)}</span><b>{typo(o.price, lang)}</b></a></li>
+      ))}
+    </ul>
     <p class="wall__hint caption" aria-hidden="true"><span class="wall__rule"></span>{typo(s.hero.hint, lang)}</p>
   </div>
   <div class="wall__viewport" data-wall-viewport tabindex="-1">

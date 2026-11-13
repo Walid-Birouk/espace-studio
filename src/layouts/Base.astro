@@ -82,6 +82,7 @@ const ld = [business, ...jsonld];
     {ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
   </head>
   <body class={bodyClass}>
+    <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
     <span id="top" tabindex="-1"></span>
     <a class="skip" href="#contact">{s.nav.skip}</a>
     <header class="site-header">

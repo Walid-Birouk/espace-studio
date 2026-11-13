@@ -77,16 +77,17 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObse
   });
 }
 
-// ---- Project carousel: auto-advances one project at a time, with a progress signal ----
+// ---- Project carousel: drifts slowly across every piece (site, mood board, type, colours), with a progress signal ----
 const wallVp = document.querySelector<HTMLElement>('[data-wall-viewport]');
 const wallCtrl = document.querySelector<HTMLElement>('[data-wall-ctrl]');
 if (wallVp && wallCtrl) {
   const titles = [...wallVp.querySelectorAll<HTMLElement>('.cluster__title')];
   const dots = [...wallCtrl.querySelectorAll<HTMLButtonElement>('[data-wall-go]')];
   const pauseBtn = wallCtrl.querySelector<HTMLButtonElement>('[data-wall-pause]')!;
-  const DUR = 3500;
+  // Crosses one screen width in about 30 s: slow enough to look at each piece as it passes.
+  const SCREEN_SECONDS = 30;
   let idx = 0, timer = 0, userPaused = matchMedia('(prefers-reduced-motion: reduce)').matches, hold = false, onScreen = true, resumeAt = 0;
-  wallCtrl.style.setProperty('--slide', `${DUR}ms`);
+  let raf = 0, pos = 0, lastFrame = 0, endAt = 0;
   // Line each project up with the page's text edge (the controls row is a .wrap, so it knows that edge).
   const board = wallVp.querySelector<HTMLElement>('[data-wall-board]')!;
   let edge = 16, ml = 0;
@@ -101,7 +102,21 @@ if (wallVp && wallCtrl) {
   const left = (i: number) => Math.max(0, titles[i].offsetLeft + ml - edge);
   const mark = (i: number) => {
     idx = i;
-    dots.forEach((d, k) => { d.parentElement!.toggleAttribute('data-on', k === i); d.parentElement!.toggleAttribute('data-done', k < i); });
+    dots.forEach((d, k) => {
+      d.parentElement!.toggleAttribute('data-on', k === i); d.parentElement!.toggleAttribute('data-done', k < i);
+      if (k !== i) d.querySelector('b')!.style.transform = '';
+    });
+  };
+  const maxLeft = () => wallVp.scrollWidth - wallVp.clientWidth;
+  // The active dot fills as the drift moves through that project.
+  const progress = () => {
+    const x = wallVp.scrollLeft;
+    let k = 0;
+    titles.forEach((_, j) => { if (left(j) <= x + 40) k = j; });
+    if (k !== idx) mark(k);
+    const end = k + 1 < titles.length ? left(k + 1) : maxLeft();
+    const f = Math.min(1, Math.max(0, (x - left(k)) / Math.max(1, end - left(k))));
+    dots[k].querySelector('b')!.style.transform = `scaleX(${f})`;
   };
   const running = () => !userPaused && !hold && !pageScrolling && onScreen && !document.hidden && Date.now() >= resumeAt;
   const sync = () => {
@@ -111,18 +126,42 @@ if (wallVp && wallCtrl) {
   };
   const go = (i: number, smooth = true) => {
     const n = (i + titles.length) % titles.length;
+    // Let the jump finish before drifting again.
+    resumeAt = Math.max(resumeAt, Date.now() + 1200);
+    wallVp.classList.remove('is-drifting');
     wallVp.scrollTo({ left: left(n), behavior: smooth ? 'smooth' : 'auto' });
     mark(n);
     restart();
   };
+  const tick = (t: number) => {
+    if (!running()) { restart(); return; }
+    const dt = lastFrame ? Math.min(64, t - lastFrame) : 16;
+    lastFrame = t;
+    // Someone scrolled by hand: carry on from where they left it.
+    if (Math.abs(wallVp.scrollLeft - Math.round(pos)) > 2) pos = wallVp.scrollLeft;
+    if (pos >= maxLeft() - 1) {
+      // End of the wall: rest a moment on the last project, then go back to the first.
+      if (!endAt) endAt = t;
+      if (t - endAt > 2500) { endAt = 0; go(0); return; }
+    } else {
+      pos = Math.min(maxLeft(), pos + (wallVp.clientWidth / SCREEN_SECONDS) * (dt / 1000));
+      wallVp.scrollLeft = pos;
+    }
+    progress();
+    raf = requestAnimationFrame(tick);
+  };
   const restart = () => {
     clearTimeout(timer);
-    // Restart the progress bar animation on the active dot.
-    const bar = dots[idx]?.querySelector('b');
-    if (bar) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
+    cancelAnimationFrame(raf);
     sync();
-    if (running()) timer = window.setTimeout(() => go(idx + 1), DUR);
-    else if (!userPaused && Date.now() < resumeAt) timer = window.setTimeout(restart, resumeAt - Date.now());
+    if (running()) {
+      wallVp.classList.add('is-drifting');
+      pos = wallVp.scrollLeft; lastFrame = 0;
+      raf = requestAnimationFrame(tick);
+    } else {
+      wallVp.classList.remove('is-drifting');
+      if (!userPaused && Date.now() < resumeAt) timer = window.setTimeout(restart, resumeAt - Date.now());
+    }
   };
   // Swiping or scrolling by hand: follow along, and wait a moment before sliding again.
   let scrollT = 0;
@@ -148,7 +187,7 @@ if (wallVp && wallCtrl) {
   // Don't slide the carousel while the page itself is scrolling (smoother on low-end phones).
   let pageT = 0, pageScrolling = false;
   addEventListener('scroll', () => {
-    if (!pageScrolling) { pageScrolling = true; clearTimeout(timer); }
+    if (!pageScrolling) { pageScrolling = true; clearTimeout(timer); cancelAnimationFrame(raf); wallVp.classList.remove('is-drifting'); }
     clearTimeout(pageT);
     pageT = window.setTimeout(() => { pageScrolling = false; restart(); }, 700);
   }, { passive: true });

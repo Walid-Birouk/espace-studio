@@ -30,7 +30,14 @@
     "line": "Based in Paris, for shops here and anywhere.",
     "cta": "Book a free call",
     "whatsapp": "WhatsApp",
-    "hint": "Recent work"
+    "hint": "Recent work",
+    "offersLabel": "Offers and prices",
+    "offers": [
+      { "name": "Showcase website", "price": "from €690" },
+      { "name": "Website subscription", "price": "€79 / mo" },
+      { "name": "Google and ads", "price": "from €149 / mo" },
+      { "name": "Loyalty card", "price": "€19 / mo" }
+    ]
   },
   "story": {
     "title": "How a customer finds you.",

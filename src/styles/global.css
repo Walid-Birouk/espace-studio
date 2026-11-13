@@ -368,8 +368,6 @@ button { font: inherit; color: inherit; }
 .wall__dots b { display: block; height: 100%; width: 0; background: var(--enamel); }
 .wall__dots li[data-done] b { width: 100%; background: color-mix(in srgb, var(--enamel) 45%, var(--zinc)); }
 .wall__dots li[data-on] b { width: 100%; transform-origin: 0 50%; transform: scaleX(1); }
-.wall__ctrl[data-running] li[data-on] b { animation: wallFill var(--slide, 5.5s) linear both; }
-@keyframes wallFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @media (max-width: 599px) { .wall__dots button span { display: none; } }
 .wall__viewport { scroll-padding-left: 24px; }
 @media (min-width: 900px) {
@@ -483,3 +481,42 @@ button { font: inherit; color: inherit; }
 .legal h2 { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .legal p { line-height: 1.6; max-width: 62ch; }
 .legal p a { text-decoration: underline; text-underline-offset: .15em; }
+
+/* ---- Ambient background: soft light drifting over the paper, so the page never feels still ---- */
+.ambient { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; contain: strict; }
+.ambient i { position: absolute; width: 70vmax; aspect-ratio: 1; border-radius: 50%; will-change: transform; }
+.ambient i:nth-child(1) { left: -20vmax; top: -25vmax; background: radial-gradient(closest-side, color-mix(in srgb, var(--enamel) 16%, transparent), transparent); animation: amb1 38s ease-in-out infinite alternate; }
+.ambient i:nth-child(2) { right: -25vmax; top: 10vh; background: radial-gradient(closest-side, rgba(232, 196, 120, .22), transparent); animation: amb2 46s ease-in-out infinite alternate; }
+.ambient i:nth-child(3) { left: 20vw; bottom: -35vmax; background: radial-gradient(closest-side, rgba(126, 150, 214, .14), transparent); animation: amb3 52s ease-in-out infinite alternate; }
+@keyframes amb1 { to { transform: translate(28vw, 22vh) scale(1.15); } }
+@keyframes amb2 { to { transform: translate(-30vw, 30vh) scale(.9); } }
+@keyframes amb3 { to { transform: translate(18vw, -40vh) scale(1.1); } }
+:root[data-theme="dark"] .ambient i:nth-child(2) { background: radial-gradient(closest-side, rgba(232, 196, 120, .08), transparent); }
+:root[data-theme="dark"] .ambient i:nth-child(3) { background: radial-gradient(closest-side, rgba(126, 150, 214, .10), transparent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .ambient i:nth-child(2) { background: radial-gradient(closest-side, rgba(232, 196, 120, .08), transparent); }
+  :root:not([data-theme="light"]) .ambient i:nth-child(3) { background: radial-gradient(closest-side, rgba(126, 150, 214, .10), transparent); }
+}
+@media (prefers-reduced-motion: reduce) { .ambient i { animation: none; } }
+
+/* Drifting carousel: no snapping while it moves by itself; the progress bar is set from JS. */
+.wall__viewport.is-drifting { scroll-snap-type: none; scroll-behavior: auto; }
+
+/* Hero offers: what you can buy and from how much, one glance under the pitch. */
+.wall__offers { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--zinc); }
+.wall__offers li { border-bottom: 1px solid var(--zinc); }
+.wall__offers li:nth-child(odd) { border-right: 1px solid var(--zinc); }
+.wall__offers a { display: flex; flex-direction: column; gap: 2px; min-height: 44px; padding: var(--space-3) var(--space-3) var(--space-3) 0; color: var(--ink); text-decoration: none; transition: background-color var(--dur-fast) ease; }
+.wall__offers li:nth-child(even) a { padding-left: var(--space-3); }
+.wall__offers .caption { color: var(--graphite); }
+.wall__offers b { font-family: var(--font-display); font-stretch: var(--stretch-heading); font-size: clamp(22px, 2.2vw, 28px); line-height: 1.1; font-weight: 700; font-variant-numeric: tabular-nums; }
+.wall__offers a:hover b { color: var(--enamel); }
+.wall__offers a:focus-visible { outline: 2px solid var(--plaque-green); outline-offset: 2px; }
+@media (min-width: 900px) {
+  .wall__offers { grid-column: 1 / -1; grid-row: 3; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .wall__offers li { border-right: 1px solid var(--zinc); }
+  .wall__offers li:last-child { border-right: 0; }
+  .wall__offers li a, .wall__offers li:nth-child(even) a { padding-left: var(--space-3); }
+  .wall__offers li:first-child a { padding-left: 0; }
+  .wall__intro .wall__hint { grid-row: 4; }
+}
